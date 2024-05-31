@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 //Blessing Abumere
-class HW1{
+class Abumere_HW_01_02{
 
     /** Generate: Generate a matrix with values 1 - 10 */
     public static int[][] Generate(final int SIZE){
@@ -32,7 +32,12 @@ class HW1{
         //show 1 and 2 matrices
         print2d(matrix1,matrix2);
 
-        result = arithmatic(matrix1,matrix2,'+');
+
+        for (int r = 0; r < SIZE;r++)
+            for (int c = 0; c < SIZE;c++)
+                result[r][c] = matrix1[r][c] + matrix2[r][c];
+
+        
         
         System.out.println("\nThe resulting matrix is:");
             print2d(result);
@@ -45,7 +50,7 @@ class HW1{
         Console.nextLine();
     }
 
-    //2. subtract two matrices
+    /**2. subtract two matrices */
     public static void Subtraction(Scanner Console){
         System.out.print("\nEnter the size of square matrices: \t");
             final int SIZE = Console.nextInt();
@@ -59,9 +64,10 @@ class HW1{
         // show 1 and 2 matrices
         print2d(matrix1,matrix2);
 
-
-        
-        result = arithmatic(matrix1,matrix2,'-');
+        //subtract
+        for (int r = 0; r < SIZE;r++)
+            for (int c = 0; c < SIZE;c++)
+                result[r][c] = matrix1[r][c] - matrix2[r][c];
 
         System.out.println("\nThe resulting matrix is:");
             print2d(result);
@@ -71,14 +77,83 @@ class HW1{
     }
 
 
+    /** 3. Multiply two matrices */
+    public static void Multiply(Scanner Console){
+        System.out.print("\nEnter the size of square matrices: \t");
+            final int SIZE = Console.nextInt();
 
+        int[][] matrix1 = Generate(SIZE);
+        int[][] matrix2 = Generate(SIZE);
+
+        int[][] result = new int[SIZE][SIZE];
+
+        //show 1 and 2 matrices
+        print2d(matrix1,matrix2);
+
+        //multiply
+        for (int r = 0; r < SIZE;r++)
+            for (int c = 0; c < SIZE;c++)
+                for (int i = 0; i < SIZE;i++)
+                    result[r][c] += matrix1[r][i] * matrix2[i][c];
+
+        System.out.println("\nThe resulting matrix is:");
+            print2d(result);
+
+        System.out.println("\n\tCommand number 3 completed.");
+    }
+    /** 4. Multiply by a constant */
+    public static void Multiply_K(Scanner Console){
+        System.out.print("\nEnter the size of square matrices: \t");
+            final int SIZE = Console.nextInt();
+
+        System.out.print("Enter the multiplication Constant: \t");
+            final int K = Console.nextInt();
+
+
+        int[][] result = new int[SIZE][SIZE]; 
+    
+        int[][] matrix1 = Generate(SIZE);
+
+        System.out.println("The matrix is:");
+            print2d(matrix1);
+
+        for (int r = 0; r < SIZE;r++)
+            for (int c = 0; c < SIZE;c++)
+                result[r][c] = matrix1[r][c] * K;
+
+        System.out.printf("\nThe matrix multiplied by %d is:\n",K);
+            print2d(result);
+
+        System.out.println("\n\tCommand number 4 completed.");
+    }
+
+    /** 5. Transpose a matrix  */
+    public static void Transposition(Scanner Console){
+        System.out.print("\nEnter the size of square matrices: \t");
+            final int SIZE = Console.nextInt();
+        
+        int[][] matrix1 = Generate(SIZE);
+        int[][] result = new int[SIZE][SIZE];
+
+        System.out.println("The matrix is:");
+            print2d(matrix1);
+
+        for (int r = 0; r < SIZE;r++)
+            for (int c = 0; c < SIZE;c++)
+                result[r][c] = matrix1[c][r];
+
+        System.out.println("The transposed matrix is:");
+            print2d(result);
+
+        System.out.println("\n\tCommand number 5 completed.");
+    }
 
 
     
-    /**lists the options for matrix operations for which you designed the previous functions,
+    /**menu: lists the options for matrix operations for which you designed the previous functions,
 and an option to exit the program. */
     public static void menu(){  
-        System.out.printf("\n%s2\n%s",
+        System.out.printf("\n%s\n%s",
     "Your options are:", 
             "-----------------"
         );
@@ -102,68 +177,55 @@ and an option to exit the program. */
         do {
             menu();
             
-            //when illegal redo the loop
+            //redos when exception caugh t and if exit is not true
             try {
                 System.out.print("\nPlease Enter Your Option: \t");
                 input_option = Console.nextInt(); 
-            }
-            catch(InputMismatchException e) {continue;}
-               
-                 
-            switch (input_option){
-                case 0: exit = true;
-                break;
+              
+                switch (input_option){
+                    case 0: exit = true;
+                    break;
 
-                case 1: Addition(Console);
-                break;
+                    case 1: Addition(Console);
+                    break;
 
-                case 2: Subtraction(Console);
-                break;
+                    case 2: Subtraction(Console);
+                    break;
 
-                case 3: 
-                break;
+                    case 3: 
+                    break;
 
+                    case 4: Multiply_K(Console);
+                    break;
 
-                default: continue;
+                    case 5: Transposition(Console);
+                    break;
+
+                    default: throw new IllegalArgumentException("\nThere is no Option " + input_option);
+                }
+            }catch(InputMismatchException e) {
+                System.out.println("Invalid input. Input must be a number.");
+                continue;
+            }catch(IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                continue;
             }
         } 
         while (!exit);
         
-     
         
+        System.out.println("\nTesting completed.");
         Console.close();
     }
 
 
-
+    /** random number with object parameter for looping */
     static int random(final int minimum,final int maximum,Random rand){
         return rand.nextInt(1 +maximum - minimum) + minimum;
     }
 
 
-    //for matrix addition, subtraction, multiplication
-    static int[][] arithmatic(int[][] m1,int[][] m2,char operation){
-
-        final int SIZE = m1.length;
-        int[][] result = new int[SIZE][SIZE];
-
-        for (int row = 0; row < SIZE;row++)
-            for (int col = 0; col< SIZE; col++)
-                result[row][col] = arithmatic(m1[row][col],m2[row][col],operation);
-
-        return result;
-    }
-    static int arithmatic(int val1, int val2,char operation){
-        switch (operation)
-        {
-              case '+': return val1 + val2;
-              case '-': return val1 - val2;
-              case '*': return val1 * val2;
-
-              default: throw new IllegalArgumentException(operation + " operation doesnt exist");
-         }
-    }
-
+    /** prints 2 matrices and identifies each */
     static void print2d(int[][] matrix1,int[][] matrix2){
         System.out.println("First matrix is:");
             print2d(matrix1);
@@ -171,6 +233,7 @@ and an option to exit the program. */
         System.out.println("Second matrix is:");
             print2d(matrix2);
     }
+
     /** prints a 2d int array */
     static void print2d(int[][] arr){
         for (int arr1d[]: arr){

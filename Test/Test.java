@@ -1,40 +1,26 @@
 import java.util.Scanner;
-import java.util.*;
-
+import java.util.Random;
+import java.util.Arrays;
 
 public class Test <Type> {
     public static void main(String[] args) {
+        Fraction f = new Fraction(0,9);
         
-        /*   
-        System.out.println("Which Method Do You Want To Run?");
-            final int METHOD = Console.nextInt();
-
-        try {
-            switch (METHOD){
-            case 1: 
-            break;
-
-            case 2: 
-            break;
-
-            case 3:
-            break;
-
-            case 4:
-            break;
-
-            default: throw new IllegalArgumentException("\nMethod " +  METHOD + " doesnt exist");
-        }     
-         
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }finally{
-            Console.close();
-        }
-            */
         
+        var f2 = f.getCopy();
+
+
+           
+        
+        
+
+
+        println(f2);
+       
     }
 
+
+    
       /** a better System.out.print() */
     static <Type> void print(Type x){ 
         System.out.print(x);
