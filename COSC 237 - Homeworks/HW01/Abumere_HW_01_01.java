@@ -7,7 +7,6 @@ class Abumere_HW_01_02{
 
     /** Generate: Generate a matrix with values 1 - 10 */
     public static int[][] Generate(final int SIZE){
-
         Random rand_obj = new Random();
         int[][] output = new int[SIZE][SIZE];
 
@@ -73,15 +72,27 @@ class Abumere_HW_01_02{
             print2d(result);
 
         System.out.println("\n\tCommand number 2 completed.");
-
     }
-
 
     /** 3. Multiply two matrices */
     public static void Multiply(Scanner Console){
         System.out.print("\nEnter the size of square matrices: \t");
             final int SIZE = Console.nextInt();
 
+        /* testcase
+        int[][] matrix1 = {
+            {6 ,9 ,10},
+            {4 ,7 ,8},
+            {10 ,8 ,7}
+        };
+
+        int[][] matrix2 = {
+            {4 ,10 ,6},
+            {3 ,8 ,4},
+            {8 ,2 ,5}
+        };
+        */
+        
         int[][] matrix1 = Generate(SIZE);
         int[][] matrix2 = Generate(SIZE);
 
@@ -90,11 +101,14 @@ class Abumere_HW_01_02{
         //show 1 and 2 matrices
         print2d(matrix1,matrix2);
 
-        //multiply
-        for (int r = 0; r < SIZE;r++)
-            for (int c = 0; c < SIZE;c++)
-                for (int i = 0; i < SIZE;i++)
+        //multiply formula : c00 = a00 * b00 += a01 * b10 += a02 * b20 
+        for (int i = 0; i< SIZE; i++)
+            for (int r = 0; r <SIZE ; r++)
+                for (int c = 0 ; c< SIZE; c++)
                     result[r][c] += matrix1[r][i] * matrix2[i][c];
+                
+            
+        
 
         System.out.println("\nThe resulting matrix is:");
             print2d(result);
@@ -131,7 +145,18 @@ class Abumere_HW_01_02{
     public static void Transposition(Scanner Console){
         System.out.print("\nEnter the size of square matrices: \t");
             final int SIZE = Console.nextInt();
-        
+    
+        /*testcase   
+        int[][] matrix1 = {
+            {4 ,9 ,4 ,3 ,7 ,2 ,6},
+            {2 ,2 ,10 ,6 ,3 ,9 ,9},
+            {7 ,4 ,2 ,8 ,9 ,9 ,2},
+            {9 ,1 ,7 ,5 ,10 ,10 ,5},
+            {8 ,6 ,8 ,7 ,7 ,1 ,8},
+            {3 ,2 ,9 ,8 ,10 ,6 ,2},
+            {6 ,10 ,6 ,10 ,6 ,6 ,5}
+        };
+        */
         int[][] matrix1 = Generate(SIZE);
         int[][] result = new int[SIZE][SIZE];
 
@@ -148,7 +173,36 @@ class Abumere_HW_01_02{
         System.out.println("\n\tCommand number 5 completed.");
     }
 
+    /** 6. Matrix Trace: sum of left diagonal */
+    public static void Trace(Scanner Console){
+        System.out.print("\nEnter the size of square matrices: \t");
+            final int SIZE = Console.nextInt();
 
+        int[][] matrix1 = Generate(SIZE);
+
+        /*testcase
+        int[][] matrix1 = {
+            {2 ,2 ,5 ,9, 4},
+            {7, 3, 1, 5, 4},
+            {8, 9, 10, 4, 4},
+            {4, 6, 10, 4, 8},
+            {6, 10, 10, 9, 8}
+        };
+        */
+        int result = 0;
+
+        System.out.println("The matrix is:");
+            print2d(matrix1);
+
+        //left diagonal only
+        for (int l = 0; l < SIZE; l++){
+            result += matrix1[l][l];
+        }
+
+        System.out.println("The trace of the matrix is: " + result);
+
+        System.out.println("\n\tCommand number 6 completed.");
+    }
     
     /**menu: lists the options for matrix operations for which you designed the previous functions,
 and an option to exit the program. */
@@ -192,13 +246,16 @@ and an option to exit the program. */
                     case 2: Subtraction(Console);
                     break;
 
-                    case 3: 
+                    case 3: Multiply(Console); //checked
                     break;
 
                     case 4: Multiply_K(Console);
                     break;
 
-                    case 5: Transposition(Console);
+                    case 5: Transposition(Console); //checked
+                    break;
+
+                    case 6: Trace(Console); //checked
                     break;
 
                     default: throw new IllegalArgumentException("\nThere is no Option " + input_option);
@@ -223,7 +280,6 @@ and an option to exit the program. */
     static int random(final int minimum,final int maximum,Random rand){
         return rand.nextInt(1 +maximum - minimum) + minimum;
     }
-
 
     /** prints 2 matrices and identifies each */
     static void print2d(int[][] matrix1,int[][] matrix2){

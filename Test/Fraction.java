@@ -22,7 +22,7 @@ public class Fraction {
 
 
     public void setBottom(double bottom){
-        if (bottom == 0) throw new IllegalArgumentException("Bottom cannot be zero");
+        if (bottom == 0) throw new DenominatorException("Bottom cannot be zero");
 
         this.bottom = bottom;
     }
