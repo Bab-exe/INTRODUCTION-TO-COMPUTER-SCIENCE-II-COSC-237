@@ -15,7 +15,6 @@ public class Abumere_HW_01_02 {
         
         //First, place 1 in the middle of the top row. Then, after integer k has been placed, move up one row and one column to the right to place the next integer k + 1, unless one of the following occurs:
 
-        
         output[0][N/2] = 1;
 
         final int EMPTY = 0;
@@ -25,16 +24,27 @@ public class Abumere_HW_01_02 {
         //3. If a move takes you to an already filled square or if you move out of the square at the upper right-hand corner, place k + 1 immediately below k.
 
         //if (output[][] != EMPTY) continue; 
-        int number,current_sum;
-        for (int k = 1; k < N * N; k++){
-            number = k + 1;
-
-
-            
-
-            
-        }
+        int number;
         
+        while (number <= n * n) {
+            output[row][col] = number;
+
+            // Calculate next position
+            int nextRow = (row - 1 + n) % n; // Wrap around to bottom if necessary
+            int nextCol = (col + 1) % n;     // Wrap around to left side if necessary
+
+            // Check if the next cell is already filled
+            if (magicSquare[nextRow][nextCol] != 0) {
+                // Move down one row instead
+                nextRow = (row + 1) % n;
+                nextCol = col;
+            }
+
+            // Move to the next position
+            row = nextRow;
+            col = nextCol;
+            number++;
+        }
         
         return output;
     }
@@ -44,24 +54,27 @@ public class Abumere_HW_01_02 {
         Scanner Console = new Scanner(System.in);
 
         
-        char go_again;
+        char go_again = 'Y';
         do {
 
             System.out.print("Enter the size of magic square (positive & odd): \t");
             try { 
-                print
-                ( 
-                    Magic_Square( Console.nextInt() ) 
-                );
+                print(  Magic_Square( 5 ) );
             }
-            catch (IllegalArgumentException e){
-                go_again = 'Y';
-                System.err.println(e.getMessage());
+            catch (InputMismatchException e){
+                Console.nextLine();
+                System.err.println("Size must be a number\n");
                 continue;
             }
+            catch (IllegalArgumentException e){
+                
+                System.err.println(e.getMessage() + "\n");
+                continue;
+            }
+           
 
             
-            System.out.print("\nDo you want to continue (Y/N): \t");
+            System.out.print("\n\nDo you want to continue (Y/N): \t");
                 go_again = Console.next().charAt(0);
 
             
