@@ -99,9 +99,9 @@ public class Fraction {
 
     public Fraction getCopy(){ return new Fraction(this.top,this.bottom);}
 
+
+    //custom exception
     private class DenominatorException extends IllegalArgumentException{
-
-
         public DenominatorException(String msg){
             super(msg);
         }
