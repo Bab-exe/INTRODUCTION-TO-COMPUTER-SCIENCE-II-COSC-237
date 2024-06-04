@@ -1,22 +1,14 @@
 import java.util.Scanner;
+
+import org.w3c.dom.css.Rect;
+
 import java.util.Random;
 import java.util.Arrays;
 
 public class Test <Type> {
     public static void main(String[] args) {
-        Fraction f = new Fraction(0,9);
         
         
-        var f2 = f.getCopy();
-
-
-           
-        
-        
-
-
-        println(f2);
-       
     }
 
 
