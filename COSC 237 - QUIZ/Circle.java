@@ -1,42 +1,44 @@
-//a
+//formuluas gotten from google
 public class Circle{
 
-    private double x, y ,radius;
+    //perimeter is circumference 
+
+    private double x, y;
+    private double radius;
 
         public Circle(double x, double y, double radius){
-            if (radius < 0 ) throw new IllegalArgumentException("Radius must be positive");
 
+            this.radius = (radius < 0 ) ? 1 : radius;
             
             this.x = x;
             this.y = y;
-            this.radius = radius;
+            
         }
 
         public Circle(){
-            this(0, 0, 0);
+            this(0, 0, 1);
         }
 
-        
 
         ///GET
 
         public double getRadius(){
-            return radius;
+            return this.radius;
         }
 
         public double getX(){
-            return x;
+            return this.x;
         }
         
         public double getY(){
-            return y;
+            return this.y;
         }
 
 
         ///SET
         public void setRadius(double radius){
-            if (radius < 0 ) throw new IllegalArgumentException("Radius must be positive");
-            this.radius = radius;
+            
+            this.radius = (radius < 0 ) ? 1 : radius;
         }
 
         public void setX(double x){
@@ -48,14 +50,25 @@ public class Circle{
             //if (y < 0) throw new IllegalArgumentException("Y must be positive");
             this.y = y;
         }
+
+        public void set(double x, double y, double radius){
+            this.x = x;
+            this.y = y;
+
+            this.setRadius(radius);
+        }
         
-        //FUNCTIONS        
+       
+        //FUNCTIONS      
+        
+        /** Circle Area = πr^2 */
         public double area(){
-            return Math.PI * radius * radius;
+            return Math.PI * (radius * radius);
         }
 
+        /** Circle Perimeter = 2πr */
         public double perimeter(){
-            return 2 * Math.PI * radius;
+            return 2 * Math.PI * this.radius;
         }
 
         
@@ -73,20 +86,20 @@ public class Circle{
         ///OVERRIDES
         @Override
         public String toString(){
-            return this.x + ";" + this.y + ";" + this.radius;
+            return this.x + "; " + this.y + "; " + this.radius;
         }
 
         @Override
         public boolean equals(Object other){
             if (!(other instanceof Circle)) return false;
+            
             Circle otherC = (Circle)other;
 
-            return 
+            return (
                 this.x == otherC.x && 
                 this.y == otherC.y && 
-                this.radius == otherC.radius;
-
-
+                this.radius == otherC.radius
+            );
         }
 
 }
