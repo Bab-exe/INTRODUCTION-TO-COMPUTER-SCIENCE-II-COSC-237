@@ -1,40 +1,18 @@
 import java.util.Scanner;
-import java.util.*;
 
+import org.w3c.dom.css.Rect;
+
+import java.util.Random;
+import java.util.Arrays;
 
 public class Test <Type> {
     public static void main(String[] args) {
         
-        /*   
-        System.out.println("Which Method Do You Want To Run?");
-            final int METHOD = Console.nextInt();
-
-        try {
-            switch (METHOD){
-            case 1: 
-            break;
-
-            case 2: 
-            break;
-
-            case 3:
-            break;
-
-            case 4:
-            break;
-
-            default: throw new IllegalArgumentException("\nMethod " +  METHOD + " doesnt exist");
-        }     
-         
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }finally{
-            Console.close();
-        }
-            */
         
     }
 
+
+    
       /** a better System.out.print() */
     static <Type> void print(Type x){ 
         System.out.print(x);
