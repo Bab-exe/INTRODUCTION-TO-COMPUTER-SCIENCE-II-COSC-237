@@ -1,0 +1,15 @@
+﻿COSC 237 Labs Guidelines
+1. A lab must be turned in within three days after it takes place (unless otherwise specified in the summer
+session) via email address: namnp.tu@gmail.com.
+2. Create a folder named “Last_First_LabXX” where XX is the lab ID, e.g., “Smith_David_Lab01” for lab 01.
+3. Create a separated file for each programming answer, name them “LabXX.java” where XX is the question
+ID, e.g., “Lab01.java” for question 01. For non-programming answers, put your answers in the comment
+section of any source code (i.e., .java file).
+4. Include all your source code and input files in this folder (no .class files should be included).
+5. Zip the folder and submit the zipped file via email with subject “COSC237_Last_First_LabXX” where XX
+is the lab ID, e.g., “COSC237_Smith_David_Lab01” for lab 01.
+Notes
+• NO LATE SUBMISSIONS WILL BE ACCEPTED.
+• Failure to follow the submission guidelines will result in 30% grade deduction.
+• All labs must be turned in and are subject to grading except for labs 01 and 02. However, not all of them
+will be graded. Only five (05) labs, chosen randomly, will be graded.
