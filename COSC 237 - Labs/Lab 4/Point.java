@@ -99,7 +99,7 @@ given Point object */
 Point object. */
     public double slope(Point p2){
         //y2 - y1 / x2 - x1
-        return (p2.y - this.y) / (p2.x - this.x); 
+        return ((double)(p2.y - this.y) / (p2.x - this.x)); 
     }
 
     public void copy(Point p2){
