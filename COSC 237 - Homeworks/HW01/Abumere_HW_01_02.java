@@ -25,7 +25,6 @@ public class Abumere_HW_01_02 {
 
         //if (output[][] != EMPTY) continue; 
         int number;
-        
         while (number <= n * n) {
             output[row][col] = number;
 
@@ -53,9 +52,8 @@ public class Abumere_HW_01_02 {
     public static void main(String[] args){
         Scanner Console = new Scanner(System.in);
 
-        
         char go_again = 'Y';
-        do {
+        while(go_again == 'Y' || go_again == 'y'){
 
             System.out.print("Enter the size of magic square (positive & odd): \t");
             try { 
@@ -67,26 +65,18 @@ public class Abumere_HW_01_02 {
                 continue;
             }
             catch (IllegalArgumentException e){
-                
                 System.err.println(e.getMessage() + "\n");
                 continue;
             }
-           
-
             
             System.out.print("\n\nDo you want to continue (Y/N): \t");
-                go_again = Console.next().charAt(0);
-
-            
+                go_again = Console.next().charAt(0);   
         }
-        while(go_again == 'Y' || go_again == 'y');
+        
         
 
         Console.close();
     }
-
-
-    
 
     /** prints the magic square */
     static void print(int[][] arr){

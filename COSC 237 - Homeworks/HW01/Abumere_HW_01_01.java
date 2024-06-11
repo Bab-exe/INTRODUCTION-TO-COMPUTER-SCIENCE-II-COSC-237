@@ -9,11 +9,11 @@ class Abumere_HW_01_02{
     public static int[][] Generate(final int SIZE){
         Random rand_obj = new Random();
         int[][] output = new int[SIZE][SIZE];
-
+        
         for (int r = 0 ; r < SIZE;r++)
             for (int c = 0; c< SIZE;c++)
                 output[r][c] = random(1,10,rand_obj);
-
+                
         return output;
     }
     
