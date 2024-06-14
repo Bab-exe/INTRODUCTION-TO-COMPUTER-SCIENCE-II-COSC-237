@@ -12,7 +12,7 @@ Absolute value: |(a, b)| = sqrt(a2 + b2)
 public class ComplexNumber {
 
     
-    public double a,bi;
+    private double a,bi;
 
     /**Constructors for default and explicit initialization. */
     public ComplexNumber(double a, double bi) {
@@ -51,34 +51,66 @@ public class ComplexNumber {
 
     /** (a, b) - (c, d) = (a - c, b - d) */
     public void subtract(ComplexNumber n){
+        final double a = this.a;
+        final double b = this.bi;
+
         this.bi = this.bi - n.bi;
         this.a = this.a - n.a;
+
+        Display_Result(a, b, n.a, n.bi, '-');
     }
 
     /** (a, b) * (c, d) = (a * c - b * d, a * d + b * c)*/
     public void multiply(ComplexNumber n){
         this.bi = this.bi * n.bi - this.a * n.a;
         this.a = this.a * n.a + this.bi * n.bi;
+
+        Display_Result(a, bi, bi, a, '*');
     }
 
     /** (a, b) / (c, d) = ((a * c + b * d)/(c^2 + d^2), (b * c - a * d)/(c^2 + d^2)) */
     public void divide(ComplexNumber n){
-        this.a = ((this.a * n.a) + (this.bi * n.bi)) / ((n.a * n.a) + (n.bi * n.bi)); 
 
-        this.bi = ((this.bi * n.a) - (this.a * n.bi)) / ((n.a * n.a) + (n.bi * n.bi));
+        final double a = this.a;
+        final double b = this.bi;
+        final double c = n.a;
+        final double d = n.bi; 
+       
+        this.a = (a * c + b * d)/(c*c + d*d);
+
+        this.bi = (b * c - a * d)/(c*c + d*d);
+
+        Display_Result(a, b, c, d,'/');
+
     }
 
+    //for easier result display
+    private void Display_Result(double a,double b,double c,double d,char sign){
+        System.out.printf(
+            "Result: (%.2f, %.2f) %s (%.2f, %.2f) = (%.2f, %.2f)\n",
+            a,b,
+            sign,
+            c,d,
+            this.a,this.bi
+            );
+    }
     /**A method called cAbs to implement the absolute value of a complex number.
      * |(a, b)| = sqrt(a^2 + b^2) */
     public void cAbs(){
 
         //sqrt(a^2) + sqrt(b^2) != sqrt(a^2 + b^2)
 
+        this.a = Math.sqrt(a*a);
+        this.bi = Math.sqrt(bi*bi);
         
-        
 
 
 
+    }
+
+    @Override
+    public String toString(){
+        return "(" + this.a + ", " + this.bi + ")";
     }
 
     //To test your class write a client that has at least a function menu() with options for the methods implemented and an option to exit. Your program should loop until the user chooses to exit. In this loop you are required to use a switch statement for all possible cases (similar design as the one used for Problem#1 in Assignment#1). */
