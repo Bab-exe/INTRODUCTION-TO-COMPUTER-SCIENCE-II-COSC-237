@@ -1,7 +1,6 @@
 import java.util.InputMismatchException;
+
 import java.util.Scanner;
-
-
 
 public class Abumere_HW_01_02 {
     
@@ -23,28 +22,26 @@ public class Abumere_HW_01_02 {
         //2. If a move takes you outside to the right of the square in the ith row, place k + 1 in the ith row at the left side.
         //3. If a move takes you to an already filled square or if you move out of the square at the upper right-hand corner, place k + 1 immediately below k.
 
-        //if (output[][] != EMPTY) continue; 
-        int number;
-        
-        while (number <= n * n) {
-            output[row][col] = number;
+        int k = 1;
+        for (int i = 0; i < N;i++){
+            for (int j = 0; j < N;j++){
+                // if case 1: above top row
+                
 
-            // Calculate next position
-            int nextRow = (row - 1 + n) % n; // Wrap around to bottom if necessary
-            int nextCol = (col + 1) % n;     // Wrap around to left side if necessary
 
-            // Check if the next cell is already filled
-            if (magicSquare[nextRow][nextCol] != 0) {
-                // Move down one row instead
-                nextRow = (row + 1) % n;
-                nextCol = col;
+                // if case 3: already filled square or out of square upper right corner;
+                if (output[i][j] != EMPTY || i == N - 1 && j == N - 1)
+                    output[i + 1][j] = k =+ 1;
+                
+                    
+                
+
             }
 
-            // Move to the next position
-            row = nextRow;
-            col = nextCol;
-            number++;
         }
+        //if (output[][] != EMPTY) continue; 
+        
+
         
         return output;
     }
@@ -55,11 +52,14 @@ public class Abumere_HW_01_02 {
 
         
         char go_again = 'Y';
-        do {
+
+        while(go_again == 'Y' || go_again == 'y'){
 
             System.out.print("Enter the size of magic square (positive & odd): \t");
             try { 
-                print(  Magic_Square( 5 ) );
+                print(  Magic_Square( 3 ) );
+
+                //print(  Magic_Square( Console.nextInt() ) );
             }
             catch (InputMismatchException e){
                 Console.nextLine();
@@ -71,15 +71,11 @@ public class Abumere_HW_01_02 {
                 System.err.println(e.getMessage() + "\n");
                 continue;
             }
-           
 
-            
             System.out.print("\n\nDo you want to continue (Y/N): \t");
                 go_again = Console.next().charAt(0);
-
-            
         }
-        while(go_again == 'Y' || go_again == 'y');
+        
         
 
         Console.close();
