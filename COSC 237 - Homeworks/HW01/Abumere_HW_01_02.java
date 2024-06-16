@@ -1,47 +1,51 @@
+import java.util.Arrays; //for testing
 import java.util.InputMismatchException;
-
 import java.util.Scanner;
+
+
 
 public class Abumere_HW_01_02 {
     
-    //makes a 2d array that is equal from all straight lines; this means all diagonals and all corners = whatever the sum is 
+    /**makes a 2d array that is equal from all straight lines; this means all diagonals and all corners = whatever the sum is 
+     * @param N size of the square
+     * @return MAGIC SQUARE / 2d array / matrix
+     * @throws IllegalArgumentException if N isnt odd even or isnt positive
+    */
     static int[][] Magic_Square(final int N){
         if (N % 2 == 0 || N <= 0) throw new IllegalArgumentException("INPUT ERROR!!! Invalid size.");
 
         int[][] output = new int[N][N];
-        final int SUM = N * ((N * N) + 1) / 2;
+        
 
         
-        //First, place 1 in the middle of the top row. Then, after integer k has been placed, move up one row and one column to the right to place the next integer k + 1, unless one of the following occurs:
+        //First, place 1 in the middle of the top row. 
+        int i = 0;
+        int j = N/2;
+        
+        int k = 0; 
 
-        output[0][N/2] = 1;
+            k = k + 1;
+        output[i][j] = k;
 
-        final int EMPTY = 0;
+        
+        int I,J; // big letters = calculated vals
+        for (int count = 1; count < N * N; count++) {
 
-        //1. If a move takes you above the top row in the jth column, move to the bottom of the jth column and place the integer k + 1 there.
-        //2. If a move takes you outside to the right of the square in the ith row, place k + 1 in the ith row at the left side.
-        //3. If a move takes you to an already filled square or if you move out of the square at the upper right-hand corner, place k + 1 immediately below k.
+            //will never be bigger than N
+            I = (i - 1 + N) % N; 
+            J = (j + 1) % N; 
 
-        int k = 1;
-        for (int i = 0; i < N;i++){
-            for (int j = 0; j < N;j++){
-                // if case 1: above top row
-                
-
-
-                // if case 3: already filled square or out of square upper right corner;
-                if (output[i][j] != EMPTY || i == N - 1 && j == N - 1)
-                    output[i + 1][j] = k =+ 1;
-                
-                    
-                
-
+            //only empty really matters
+            if (output[I][J] == 0) {
+                i = I; 
+                j = J;
+            } else {
+                i = (i + 1) % N;  
             }
 
+            k = k + 1; 
+            output[i][j] = k;
         }
-        //if (output[][] != EMPTY) continue; 
-        
-
         
         return output;
     }
@@ -49,53 +53,105 @@ public class Abumere_HW_01_02 {
 
     public static void main(String[] args){
         Scanner Console = new Scanner(System.in);
-
         
+    /* 
+    //testing stuff
+        {
+            int[][] test3x3 = new int[][]{
+                {8, 1, 6},
+                {3, 5, 7},
+                {4, 9, 2 }
+            };
+            int[][] test5x5 = new int[][]{
+                {17,24,1,8,15},
+                {23,5,7,14,16},
+                {4,6,13,20,22},
+                {10,12,19,21,3},
+                {11,18,25,2,9}
+            };
+            int[][] test7x7 = new int[][]{
+                {30,39,48,1,10,19,28},
+                {38,47,7,9,18,27,29},
+                {46,6,8,17,26,35,37},
+                {5,14,16,25,34,36,45},
+                {13,15,24,33,42,44,4},
+                {21,23,32,41,43,3,12},
+                {22,31,40,49,2,11,20}
+            };
+            
+            final boolean T1x1 = Arrays.deepEquals(new int[][]{{1}},Magic_Square(1)); //1x1 ;free
+            final boolean T3x3 = Arrays.deepEquals(test3x3, Magic_Square(3)) ;//3x3
+            final boolean T5x5 = Arrays.deepEquals(test5x5, Magic_Square(5)) ;//5x5
+            final boolean T7x7 = Arrays.deepEquals(test7x7, Magic_Square(7)) ;//7x7
+            System.err.print(
+                T1x1 && T3x3 && T5x5 && T7x7
+                ? "ALL PASSED"  
+                : "passed\n" + 
+                    String.format(
+                        "1x1: %b\n"
+                        + "3x3: %b\n"
+                        + "5x5: %b\n"
+                        + "7x7: %b\n",
+                        T1x1,
+                        T3x3,
+                        T5x5,
+                        T7x7
+
+                    ) 
+            );
+    
+            
+        }
+        */
+          
+        System.out.println();
+
         char go_again = 'Y';
-
         while(go_again == 'Y' || go_again == 'y'){
-
             System.out.print("Enter the size of magic square (positive & odd): \t");
             try { 
-                print(  Magic_Square( 3 ) );
-
-                //print(  Magic_Square( Console.nextInt() ) );
+                printMagicSquare(  Magic_Square( Console.nextInt() ) );
             }
             catch (InputMismatchException e){
                 Console.nextLine();
                 System.err.println("Size must be a number\n");
                 continue;
             }
-            catch (IllegalArgumentException e){
-                
+            catch (IllegalArgumentException e){ 
                 System.err.println(e.getMessage() + "\n");
                 continue;
             }
-
+           
             System.out.print("\n\nDo you want to continue (Y/N): \t");
-                go_again = Console.next().charAt(0);
+                go_again = Console.next().charAt(0);            
         }
         
-        
-
         Console.close();
     }
 
-
-    
-
-    /** prints the magic square */
-    static void print(int[][] arr){
+    static String stringMagicSquare(int[][] arr){
+        String output = "";
         final int N = arr.length;
-        System.out.printf("The magic square with size = %d is:\n",N);
+        output += String.format("The magic square with size = %d is:\n",N);
 
         for (int arr1d[]: arr){
-            for (int a: arr1d) 
-                System.out.printf("%d\t",a);     
+            for (int a: arr1d) {
+                output += String.format("%d\t",a); 
+            }
+            output += "\n";
+        }
+        final double SUM = (N * ((N*N) + 1) / 2);
+        output += String.format("The %dx%d magic square adds up to: \t%.0f",N,N, SUM);
 
+        return output;
+    }
+
+    /** prints the magic square */
+    static void printMagicSquare(int[][] ... arr3d){
+        for (int arr2d[][] : arr3d){
+            System.out.println(stringMagicSquare(arr2d));
             System.out.println();
         }
         
-        System.out.printf("The %dx%d magic square adds up to: \t%d",N,N, (N * ((N*N) + 1) / 2));
     }
 }
