@@ -9,11 +9,15 @@ class Abumere_HW_01_02{
     public static int[][] Generate(final int SIZE){
         Random rand_obj = new Random();
         int[][] output = new int[SIZE][SIZE];
-        
-        for (int r = 0 ; r < SIZE;r++)
-            for (int c = 0; c< SIZE;c++)
-                output[r][c] = random(1,10,rand_obj);
+
+        int r,c;
+        for (int i = 0;i<SIZE*SIZE;i++){
+            r = i / SIZE;
+            c = i % SIZE;
+            output[r][c] = random(1,10,rand_obj);
+        }
                 
+
         return output;
     }
     
@@ -32,9 +36,13 @@ class Abumere_HW_01_02{
         print2d(matrix1,matrix2);
 
 
-        for (int r = 0; r < SIZE;r++)
-            for (int c = 0; c < SIZE;c++)
-                result[r][c] = matrix1[r][c] + matrix2[r][c];
+        int r,c;
+        for (int i = 0;i<SIZE*SIZE;i++){
+            r = i / SIZE;
+            c = i % SIZE;
+            result[r][c] = matrix1[r][c] + matrix2[r][c];
+        }
+                
 
         
         
@@ -64,10 +72,14 @@ class Abumere_HW_01_02{
         print2d(matrix1,matrix2);
 
         //subtract
-        for (int r = 0; r < SIZE;r++)
-            for (int c = 0; c < SIZE;c++)
-                result[r][c] = matrix1[r][c] - matrix2[r][c];
 
+
+        int r,c;
+        for (int i = 0;i<SIZE*SIZE;i++){
+            r = i / SIZE;
+            c = i % SIZE;
+            result[r][c] = matrix1[r][c] - matrix2[r][c];
+        }
         System.out.println("\nThe resulting matrix is:");
             print2d(result);
 
@@ -102,10 +114,15 @@ class Abumere_HW_01_02{
         print2d(matrix1,matrix2);
 
         //multiply formula : c00 = a00 * b00 += a01 * b10 += a02 * b20 
-        for (int i = 0; i< SIZE; i++)
-            for (int r = 0; r <SIZE ; r++)
-                for (int c = 0 ; c< SIZE; c++)
-                    result[r][c] += matrix1[r][i] * matrix2[i][c];
+        int r,c;
+        for (int ii = 0; ii< SIZE; ii++){
+            for (int i = 0; i < SIZE; i++){
+                r = i / SIZE;
+                c = i % SIZE;
+                result[r][c] += matrix1[r][ii] * matrix2[ii][c];
+            }
+        }
+                    
                 
             
         
@@ -131,9 +148,14 @@ class Abumere_HW_01_02{
         System.out.println("The matrix is:");
             print2d(matrix1);
 
-        for (int r = 0; r < SIZE;r++)
-            for (int c = 0; c < SIZE;c++)
-                result[r][c] = matrix1[r][c] * K;
+
+        int r,c;
+        for (int i = 0;i<SIZE*SIZE;i++){
+            r = i / SIZE;
+            c = i % SIZE;
+            result[r][c] = matrix1[r][c] * K;
+        }
+                
 
         System.out.printf("\nThe matrix multiplied by %d is:\n",K);
             print2d(result);
@@ -163,10 +185,13 @@ class Abumere_HW_01_02{
         System.out.println("The matrix is:");
             print2d(matrix1);
 
-        for (int r = 0; r < SIZE;r++)
-            for (int c = 0; c < SIZE;c++)
-                result[r][c] = matrix1[c][r];
 
+        int r,c;
+        for (int i = 0;i<SIZE*SIZE;i++){
+            r = i / SIZE;
+            c = i % SIZE;
+            result[r][c] = matrix1[c][r];
+        }
         System.out.println("The transposed matrix is:");
             print2d(result);
 
@@ -228,7 +253,7 @@ and an option to exit the program. */
         boolean exit = false;
         int input_option;
 
-        do {
+        while (!exit){
             menu();
             
             //redos when exception caugh t and if exit is not true
@@ -268,7 +293,7 @@ and an option to exit the program. */
                 continue;
             }
         } 
-        while (!exit);
+        
         
         
         System.out.println("\nTesting completed.");
