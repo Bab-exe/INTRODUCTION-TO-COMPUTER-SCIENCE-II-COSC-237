@@ -1,4 +1,4 @@
-public class Quiz2Client<T> {
+public class Quiz2Client {
     public static void main(String[] args) {
         //classes
         Car car = new Car();
