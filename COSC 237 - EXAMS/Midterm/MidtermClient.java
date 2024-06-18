@@ -24,11 +24,24 @@ public class MidtermClient {
 
     public static void main(String[] args) {
     
-        Test_Book(new Book());
+        Test_Book(new Book(
+            1,
+            2,
+            "isbn",
+            "author",
+            "title",
+            10,
+            "duedate"
+        ));
 
         System.out.println();
         Test_DigitalMovie(new DigitalMovie(
-
+            1,
+            "serial",
+            "title",
+            "author",
+            90,
+            "duedate"
         ));
 
        
@@ -36,7 +49,7 @@ public class MidtermClient {
     }
 
     /** Book extends PhysicalItems which implements StoreRentals, OnlineRentals */
-    static void Test_Book(Book book){
+    static void Test_Book(Book book,int online_id,int store_id){
         //book tests
         System.out.println("Testing: " + book.getClass());
         System.out.println(book.toString());
@@ -50,18 +63,20 @@ public class MidtermClient {
 
         //OnlineRentals Tests
         System.out.println("--Online Rental--");
-        book.printOnlineReceipt(1);
-        book.checkOnlineAvailability(1);
+        book.printOnlineReceipt(online_id);
+        book.checkOnlineAvailability(online_id);
 
         //StoreRentals Tests
         System.out.println("--Store Rental--");
-        book.checkStoreAvailability(2);
-        book.printStoreReceipt(2);
+        book.checkStoreAvailability(store_id);
+        book.printStoreReceipt(store_id);
         
     }
-
+    static void Test_Book(Book book){
+        Test_Book(book,1,2);
+    }
     /** digital movie extends DigitalItems which implements OnlineRentals */
-    static void Test_DigitalMovie(DigitalMovie digitalMovie){
+    static void Test_DigitalMovie(DigitalMovie digitalMovie,int online_id){
         //digitalMovie tests
         System.out.println("Testing: " + digitalMovie.getClass());
         System.out.println(digitalMovie.toString());
@@ -74,7 +89,10 @@ public class MidtermClient {
 
         //OnlineRentals Tests
         System.out.println("--Online Rental--");
-        digitalMovie.printOnlineReceipt(3);
-        digitalMovie.checkOnlineAvailability(3);
+        digitalMovie.printOnlineReceipt(online_id);
+        digitalMovie.checkOnlineAvailability(online_id);
+    }
+    static void Test_DigitalMovie(DigitalMovie digitalMovie){
+        Test_DigitalMovie(digitalMovie,1);
     }
 }
