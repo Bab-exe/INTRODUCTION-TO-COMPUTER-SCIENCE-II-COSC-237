@@ -1,3 +1,5 @@
+
+
 public class Book extends PhysicalItems {
 
     private String isbn;
@@ -115,18 +117,46 @@ public class Book extends PhysicalItems {
 
     //abstract required
    
+    ///Physical Items
     /** // Prints out “<Object> with phyID=<phyID>, storeID=<storeID> is due by: <dueDate>” where dueDate is the sub-class’s variable */
     public void printDueDate() {
-        super.getPhyID();
-        super.getStoreID();
-
         System.out.printf(
             "Book with phyID = %d, storeID = %d, is due by: %s",
+
             super.getPhyID(),
             super.getStoreID(),
             this.dueDate
         );
         System.out.println();
     }
+    
+    public void printDueDateReminder() {
+        System.out.println(
+            "Reminder: Book with " + super.toString() + " will be due by: " + this.dueDate
+        );
+        
+    }
 
+    
+    ///OnlineRentals
+    public void printOnlineReceipt(int id) {
+        System.out.println("Receipt for Book with ID = " + id);
+    }
+    public boolean checkOnlineAvailability(int id) {
+        System.out.println("Checking online availability for Book with ID = " + id);
+        return true;
+    }
+
+
+    ///StoreRentals
+    public boolean checkStoreAvailability(int id) {
+        System.out.println("Checking store availability for Book with ID = " + id);
+        return true;
+    }
+    
+    public void printStoreReceipt(int id) {
+        System.out.println("Receipt for Book with ID = " + id);
+    }
+    
+        
 }

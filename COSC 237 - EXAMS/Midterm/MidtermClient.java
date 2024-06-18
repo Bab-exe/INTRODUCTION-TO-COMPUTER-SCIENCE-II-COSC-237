@@ -26,7 +26,30 @@ public class MidtermClient {
     
         Book book = new Book();
 
-        System.out.println(book.toString());
+        Test_Book(book);
+        
+    }
+
+    static void Test_Book(Book book){
+        //book tests
+        System.out.println("Testing: " + book.toString());
+
+        
+
+        //PhysicalItems Tests
+        System.out.println("-Physical Items-");
+        book.printDueDate();
+        book.printDueDateReminder();
+
+        //OnlineRentals Tests
+        System.out.println("--Online Rental--");
+        book.printOnlineReceipt(1);
+        book.checkOnlineAvailability(1);
+
+        //StoreRentals Tests
+        System.out.println("--Store Rental--");
+        book.checkStoreAvailability(2);
+        book.printStoreReceipt(2);
         
     }
 }
