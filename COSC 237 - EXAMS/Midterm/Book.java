@@ -83,8 +83,8 @@ public class Book extends PhysicalItems {
     /**. Note: function toString() in any class should print out all variables in that class separated by a comma, e.g.,
 “phyID = <phyID>, storeID = <storeID>, ...” */
     public String toString(){
-        return String.format(
-            "isbn = %s, " +
+        return super.toString() + String.format(
+            ", isbn = %s, " +
             "authors = %s, " +
             "title = %s, " +
             "numCopies = %d, " +

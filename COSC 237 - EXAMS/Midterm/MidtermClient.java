@@ -24,15 +24,22 @@ public class MidtermClient {
 
     public static void main(String[] args) {
     
-        Book book = new Book();
+        Test_Book(new Book());
 
-        Test_Book(book);
+        System.out.println();
+        Test_DigitalMovie(new DigitalMovie(
+
+        ));
+
+       
         
     }
 
+    /** Book extends PhysicalItems which implements StoreRentals, OnlineRentals */
     static void Test_Book(Book book){
         //book tests
-        System.out.println("Testing: " + book.toString());
+        System.out.println("Testing: " + book.getClass());
+        System.out.println(book.toString());
 
         
 
@@ -51,5 +58,23 @@ public class MidtermClient {
         book.checkStoreAvailability(2);
         book.printStoreReceipt(2);
         
+    }
+
+    /** digital movie extends DigitalItems which implements OnlineRentals */
+    static void Test_DigitalMovie(DigitalMovie digitalMovie){
+        //digitalMovie tests
+        System.out.println("Testing: " + digitalMovie.getClass());
+        System.out.println(digitalMovie.toString());
+        
+
+        //DigitalItems Tests
+        System.out.println("-Digital Items-");
+        digitalMovie.printDueDate();
+        digitalMovie.printDueDateReminder();
+
+        //OnlineRentals Tests
+        System.out.println("--Online Rental--");
+        digitalMovie.printOnlineReceipt(3);
+        digitalMovie.checkOnlineAvailability(3);
     }
 }
