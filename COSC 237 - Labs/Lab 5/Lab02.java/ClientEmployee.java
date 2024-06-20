@@ -1,4 +1,5 @@
 //Client program for Person/Employee
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -23,10 +24,7 @@ Couldn't find an employee with same record.
  */
     public static void main(String[] arg) {
         Scanner input = new Scanner(System.in);
-        String last, first, dept;
-        double pay_rate;
-        int hours;
-
+       
         Employee prof = new Employee(
             "John", 
             "Doe", 
@@ -36,30 +34,19 @@ Couldn't find an employee with same record.
         );
             
         //subclass alternate constructor invoked
-        Employee newEmp = new Employee(); //subclass default constructor invoked 
-
-        System.out.print("Enter employee last name: \t");
-            last = input.nextLine();
-
-        System.out.print("Enter employee first name: \t");
-            first = input.nextLine();
-
-        System.out.print("Enter department: \t");
-            dept = input.nextLine();
-
-        System.out.print("Enter employee pay rate: \t");
-            pay_rate = input.nextDouble();
-
-        System.out.print("Enter employee hours worked: \t");
-            hours = input.nextInt();
-
+        Employee iEmployee = Input_Employee(input);
+        
+        /* 
+        //testcase
         Employee iEmployee = new Employee(
-            first, 
-            last, 
-            pay_rate, 
-            hours, 
-            dept
+            "James", 
+            "Bond", 
+            35, 
+            47, 
+            "THEATRE"
         );
+        */
+       
 
         System.out.println(prof.toString());
         System.out.println(iEmployee.toString());
@@ -72,6 +59,83 @@ Couldn't find an employee with same record.
         prof.printLastFirst();
         iEmployee.printLastFirst();
 
+        //­ Output with calls to getters from the superclass
+        System.out.printf(
+            "The wages for %s, %s from the %s department are $%.2f", 
+
+            iEmployee.getFirstName(),
+            iEmployee.getLastName(),
+            iEmployee.getDepartment(),
+            iEmployee.calculatePay()
+        );
+
+        System.out.println();
+
+        //iEmployee.copy(prof);
+        //Call to overridden equalsl
+        System.out.println(
+            (iEmployee.equals(prof)) 
+            ? "Found an employee with same record."
+            : "Couldn't find an employee with same record."
+        );
+        
+
         input.close();
+    }
+
+    static Employee Input_Employee(Scanner input){
+
+        
+        
+        
+        String last, first, dept;
+        double pay_rate;
+        int hours;
+
+        
+
+
+        Employee iEmployee = new Employee();
+
+        System.out.print("Enter employee last name: \t");
+            last = input.nextLine();
+    
+        System.out.print("Enter employee first name: \t");
+            first = input.nextLine();
+    
+        System.out.print("Enter department: \t");
+            dept = input.nextLine();
+            
+        {
+            boolean bad_input = true;
+                while (bad_input){
+                    try{
+                        System.out.print("Enter employee pay rate: \t");
+                            pay_rate = input.nextDouble();
+                
+                        System.out.print("Enter employee hours worked: \t");
+                            hours = input.nextInt();
+            
+                            bad_input = false;
+            
+                            iEmployee = new Employee(
+                                first, 
+                                last, 
+                                pay_rate, 
+                                hours, 
+                                dept
+                            );
+                    }catch (InputMismatchException e){
+                        input.nextLine();
+                        System.out.println("Input Error:" + e.getMessage());
+                        continue;
+                    }
+                }
+        }
+            
+        
+
+        return iEmployee;
+
     }
 }

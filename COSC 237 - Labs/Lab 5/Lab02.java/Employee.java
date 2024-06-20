@@ -12,8 +12,8 @@ public class Employee extends Person {
      //default constructor
      public Employee() {
         super();
-        payRate = 0.0;
-        hoursWorked = 0.0;
+        payRate = 0.00;
+        hoursWorked = 0.00;
         department = "";
      }
  
@@ -34,11 +34,11 @@ public class Employee extends Person {
     //set
 
     public void setPayRate(double rate) {
-        this.payRate = (rate < 0.0) ? 0.0 : rate;
+        this.payRate = (rate < 0.00) ? 0.00 : rate;
     }
 
     public void setHoursWorked(double hours) {
-        this.hoursWorked = (hours < 0.0) ? 0.0 : hours;
+        this.hoursWorked = (hours < 0.00) ? 0.00 : hours;
     }
 
     public void setDepartment(String department) {
@@ -50,9 +50,17 @@ public class Employee extends Person {
      public String toString() {
          //should return a String like this:
          //The wages for xxxx from the xxxx department are: $xxxxx.xx"
- 
-         return "The wages for " + super.toString() + " from the " + department + " department are: $" + calculatePay();
- 
+        
+        
+        return String.format(
+            "The wages for %s, %s from the %s department are: $%.2f",
+
+            super.getLastName(),
+            super.getFirstName(),
+            this.department,
+            calculatePay()
+        );
+    
      }
  
     public void print() {
@@ -60,22 +68,35 @@ public class Employee extends Person {
         //The employee xxxx from the xxxx department worked xx hours
         //with a pay rate of $xxx.xx. The wages for this employee are $xxxxx.xx
     
-        System.out.println(
-            "The employee " + super.toString() + " from the " + department + " department worked " + this.hoursWorked + 
-            " hours with a pay rate of $" + this.payRate + ". The wages for "+ super.toString() + " are $" +
+        System.out.printf(
+            "The employee %s from the %s department worked " + this.hoursWorked + " hours with a pay rate of $%.2f. The wages for %s are $%.2f",
+
+            super.toString(),
+            this.department,
+
+            this.payRate,
+            super.toString(),
             calculatePay()
         );
+
+        System.out.println();
 
     }
  
     public void printLastFirst() {
         
-        final String NAME = super.getLastName() + ", " + super.getFirstName();
-        System.out.println(
-            "The employee " + NAME + " from the " + department + " department worked " + this.hoursWorked + 
-            " hours with a pay rate of $" + this.payRate + ". The wages for "+ NAME + " are $" +
+        System.out.printf(
+            "The employee %s, %s from the %s department worked " + this.hoursWorked + " hours with a pay rate of $%.2f. The wages for %s are $%.2f",
+
+            super.getLastName(),
+            super.getFirstName(),
+            this.department,
+            this.payRate,
+            super.toString(),
             calculatePay()
         );
+
+        System.out.println();
     }
     
     public double calculatePay() {
@@ -115,7 +136,8 @@ String dep){
     public String getDepartment() {
         return department;
     }
-    
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Employee)) return false;
         
@@ -140,7 +162,8 @@ String dep){
     }
     
     public void copy(Employee e) {
-        super.setName(super.getFirstName(), super.getLastName());
+        
+        super.setName(e.getFirstName(), e.getLastName());
 
         this.payRate = e.payRate;
         this.hoursWorked = e.hoursWorked;
