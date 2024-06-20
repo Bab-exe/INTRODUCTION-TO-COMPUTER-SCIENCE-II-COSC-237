@@ -35,7 +35,7 @@ Couldn't find an employee with same record.
             
         //subclass alternate constructor invoked
         Employee iEmployee = Input_Employee(input);
-        
+
         /* 
         //testcase
         Employee iEmployee = new Employee(
@@ -127,7 +127,7 @@ Couldn't find an employee with same record.
                             );
                     }catch (InputMismatchException e){
                         input.nextLine();
-                        System.out.println("Input Error:" + e.getMessage());
+                        System.out.println("\nInput Error: expected numerical input");
                         continue;
                     }
                 }

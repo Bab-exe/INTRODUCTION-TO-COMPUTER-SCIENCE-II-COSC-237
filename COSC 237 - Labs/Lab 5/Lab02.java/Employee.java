@@ -104,9 +104,10 @@ public class Employee extends Person {
         //handle both regular and overtime pay
 
         final double PAY = this.payRate * this.HOURS;
-        final double OVERTIME_PAY = (this.payRate * this.OVERTIME) * (this.hoursWorked-HOURS);
-        
-        return PAY + OVERTIME_PAY; 
+        final double OVERTIME_PAY = ((this.payRate * this.OVERTIME) * (this.hoursWorked-HOURS));
+
+        //to avoid negative pay
+        return PAY + ((OVERTIME_PAY > 0 ) ? OVERTIME_PAY : 0); 
     }
 
     
