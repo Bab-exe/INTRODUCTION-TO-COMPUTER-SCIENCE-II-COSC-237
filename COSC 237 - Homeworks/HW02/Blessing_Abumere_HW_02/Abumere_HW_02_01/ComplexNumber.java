@@ -1,3 +1,5 @@
+package Blessing_Abumere_HW_02.Abumere_HW_02_02;
+
 /* 
 A complex ("imaginary") number has the form a + bi, where a is called
 the real part, b is called the imaginary part, and i = sqrt(-1). A complex number a + bi
@@ -11,7 +13,6 @@ Absolute value: |(a, b)| = sqrt(a2 + b2)
  */
 public class ComplexNumber {
 
-    
     private double a,bi;
 
     /**Constructors for default and explicit initialization. */
@@ -27,9 +28,6 @@ public class ComplexNumber {
 
 
 
-
-
-    
     //A method to read a complex number. Look at the sample output screen for the design required.
     
 
