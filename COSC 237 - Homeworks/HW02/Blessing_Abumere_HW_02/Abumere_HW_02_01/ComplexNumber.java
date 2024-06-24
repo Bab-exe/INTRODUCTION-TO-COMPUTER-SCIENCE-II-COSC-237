@@ -1,4 +1,3 @@
-package Blessing_Abumere_HW_02.Abumere_HW_02_02;
 
 /* 
 A complex ("imaginary") number has the form a + bi, where a is called
