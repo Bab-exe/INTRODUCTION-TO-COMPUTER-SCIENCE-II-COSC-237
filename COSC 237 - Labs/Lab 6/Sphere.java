@@ -21,7 +21,7 @@ public class Sphere implements Shape3D {
   
     public String toString() {        
 
-        return ";" + this.radius;
+        return "The radius of this sphere = " + radius;
     } 
   
     public boolean equals(Object obj) {        

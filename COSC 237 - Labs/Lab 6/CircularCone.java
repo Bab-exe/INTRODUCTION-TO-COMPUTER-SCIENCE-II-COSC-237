@@ -18,7 +18,7 @@ public class CircularCone extends CircularShapeWithHeight {
     } 
   
     public String toString() { 
-       return getRadius() + ";" + getHeight();
+       return "For this circular cone the radius = " + super.getRadius() + " and the height = " + super.getHeight();
     } 
   
    public boolean equals(Object obj) { 

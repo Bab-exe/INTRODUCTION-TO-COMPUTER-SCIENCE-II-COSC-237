@@ -15,7 +15,7 @@ public class Cylinder extends CircularShapeWithHeight {
     } 
   
     public String toString() { 
-       return super.toString();
+       return "For this cylinder the radius = " + super.getRadius() + " and the height = " + super.getHeight();
     } 
   
     public boolean equals(Object obj) { 

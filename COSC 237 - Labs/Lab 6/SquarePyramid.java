@@ -24,9 +24,9 @@ public class SquarePyramid implements Shape3D {
     public double getVolume() {       
         return length * length * height / 3.0;
     } 
-  
+   
     public String toString() {        
-        return length + ";" + height;
+        return "For this square pyramid the base has the length = " + this.length + " and the height = " + this.height;
     } 
   
     public boolean equals(Object obj) {        

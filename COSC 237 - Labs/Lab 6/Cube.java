@@ -9,6 +9,6 @@ public class Cube extends RectangularPrism {
     } 
   
     public String toString() {       
-        return super.toString();
+        return "For this cube all sides = " + super.getHeight();
     } 
 }

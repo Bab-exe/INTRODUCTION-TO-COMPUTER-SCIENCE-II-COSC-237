@@ -34,7 +34,7 @@ public class RectangularPrism implements Shape3D {
   
     @Override
     public String toString() { 
-        return length + " x " + width + " x " + height;
+        return "For this rectangular prism the base has the length = " + this.length + " and the width = " + this.width + "\nThe height of the prism = " + this.height;
     } 
   
     @Override
