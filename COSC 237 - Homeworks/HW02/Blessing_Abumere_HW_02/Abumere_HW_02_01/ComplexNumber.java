@@ -33,7 +33,9 @@ public class ComplexNumber {
 
     /**A method to print a complex number as (a, b). Have 2 decimals for both.*/
     public void print(){
-        System.out.printf("(%f, %f)",a,bi );
+        System.out.println(
+            "(" + this.a + ", " + this.bi + ")"
+        );
     }
 
     //A method called getReal that returns the real part of a complex number.

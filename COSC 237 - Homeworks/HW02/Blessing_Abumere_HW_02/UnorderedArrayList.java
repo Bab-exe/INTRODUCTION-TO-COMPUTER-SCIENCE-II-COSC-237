@@ -1,7 +1,7 @@
 package Blessing_Abumere_HW_02.Abumere_HW_02_02;
 
 
-import Abumere_HW_02_02.Lecture08.*;
+import Blessing_Abumere_HW_02.Lecture08.*;
 
 /**
  * Class: UnorderedArrayList extends

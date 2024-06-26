@@ -1,4 +1,5 @@
 package Blessing_Abumere_HW_02.Lecture08;
+
 public interface ArrayListADT<T> extends Cloneable {
     /**Method to determine whether the list is empty.*/
     public boolean isEmpty(); 
