@@ -6,7 +6,7 @@ the methods implemented and an option to exit. Your program should loop until th
 chooses to exit. */
     static int menu(Scanner Console){  
 
-        int option = -1;
+        int option ;
         System.out.printf("\n%s\n%s",
     "Your options for Complex arithmetic are:", 
             "----------------------------------------"
@@ -96,52 +96,49 @@ chooses to exit. */
     
    
     static void Display_Result(ComplexNumber n1,ComplexNumber n2, operation sign){
-        ComplexNumber old_n1 = n1.getCopy();
+        final String OLD_N1 = n1.toString();
         final char SYMBOL;
 
-        final String DISPLAY = "\nFirst Complex Number is: " + n1.toString() + 
-        "\nSecond Complex Number is: " + n2.toString()  + "\n";
-        {
-            switch(sign){
-                case ADD:
-                    n1.add(n2);
-                    SYMBOL = '+';
-                    break;
+        final String DISPLAY = "\nFirst Complex Number is: " + OLD_N1 + 
+        "\nSecond Complex Number is: " + n2.toString() + '\n';
+        
+        switch(sign){
+            case ADD:
+                n1.add(n2);
+                SYMBOL = '+';
+                break;
 
-                case SUBTRACT:
-                    n1.subtract(n2);
-                    SYMBOL = '-';
-                    break;
+            case SUBTRACT:
+                n1.subtract(n2);
+                SYMBOL = '-';
+                break;
 
-                case MULTIPLY:
-                    n1.multiply(n2);
-                    SYMBOL = '*';
-                    break;
+            case MULTIPLY:
+                n1.multiply(n2);
+                SYMBOL = '*';
+                break;
 
-                case DIVIDE:
-                    n1.divide(n2);
-                    SYMBOL = '/';
-                    break;
+            case DIVIDE:
+                n1.divide(n2);
+                SYMBOL = '/';
+                break;
 
-                default: //special case ; early return ;EQUALS
-                    System.out.println(
-                        DISPLAY + 
-                        (n1.equals(n2) ? "The complex numbers ARE equal." : "The complex numbers are NOT equal.")
-                    );
-                    n1.equals(n2);
-                    SYMBOL = '=';
-                    return;
-
-                
-            }
+            case EQUALS:
+            default: //default is EQUALS/compare 2 ;returns early because it doesnt need the Result: ...
+                System.out.println(
+                    DISPLAY + 
+                    (n1.equals(n2) ? "The complex numbers ARE equal." : "The complex numbers are NOT equal.")
+                );
+                System.out.println();
+                return;
         }
+    
         
         System.out.printf(
             DISPLAY +
             "Result: %s  %c  %s  =  %s\n\n",
             
-            old_n1.toString(),SYMBOL, n2.toString(),
-
+            OLD_N1,SYMBOL, n2.toString(),
             n1.toString()
         );
     }
