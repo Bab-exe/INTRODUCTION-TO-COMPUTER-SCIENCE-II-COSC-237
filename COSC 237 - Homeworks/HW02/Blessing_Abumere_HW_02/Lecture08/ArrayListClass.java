@@ -1,18 +1,20 @@
-package Blessing_Abumere_HW_02.Lecture08;
+package Lecture08;
 
 /**
  * Class: ArrayListClass implements
- * Interface: ArrayListADT
+ * Interface: ArrayListADT and Clonable
  */
-public abstract class ArrayListClass<T> implements ArrayListADT<T>, Cloneable {
+public abstract class ArrayListClass<T> implements Lecture08.ArrayListADT<T>  {
     protected int length; // to store the length of the list
     protected int maxSize; // to store the maximum size of the list
     protected T[] list; // array to hold the list elements
 
+   
     // Default constructor
     public ArrayListClass() {
         maxSize = 100;
         length = 0;
+
         list = (T[]) new Object[maxSize];
     }
 

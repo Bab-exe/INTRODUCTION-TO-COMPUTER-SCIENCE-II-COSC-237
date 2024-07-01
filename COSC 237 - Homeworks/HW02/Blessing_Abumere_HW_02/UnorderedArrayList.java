@@ -1,7 +1,11 @@
-package Blessing_Abumere_HW_02.Abumere_HW_02_02;
 
 
-import Blessing_Abumere_HW_02.Lecture08.*;
+
+
+
+import java.lang.reflect.Array;
+
+import Lecture08.*;
 
 /**
  * Class: UnorderedArrayList extends
@@ -26,45 +30,51 @@ public class UnorderedArrayList<T> extends ArrayListClass<T> {
      * be an unsorted list that contains all of the items from list_1 and list_2
      * (preserve the order).
      */
-    public T[] merge(T[] list_1, T[] list_2) {
-        T[] list_3 = (T[])new Object[list_1.length + list_2.length];
- 
-        for (int i = 0; i < list_1.length; i++){
-            list_3[i] = list_1[i];
+    
+    
+
+    public void merge(T[] list_1, T[] list_2) {
+        for (int i =0 ;i < list_1.length; i++){
+            insertEnd(list_1[i]);
         }
 
-        int l3 = list_1.length; //list 3 index
-        for (int i = 0; i< list_2.length; i++,l3++){
-            list_3[l3] = list_2[i];
-        }
-        
-        return (list_3);
+        for (int i =0 ;i < list_2.length; i++){
+            insertEnd(list_2[i]);
+        }        
     }
 
+    public void merge(java.util.ArrayList<T> list_1, java.util.ArrayList<T> list_2) {
+        this.merge((T[])list_1.toArray(), (T[])list_2.toArray());
+    }
+
+
+
+    
     /**
      * 2. A method named split that divides a list into 2 lists according to a key.
      * If list_1 and list_2 are the resulting lists, list_1 should contain all the items  of the original list whose keys are less than or equal to the key passed and list_2 should contain all the items of the original list whose keys are larger than the keypassed.
      */
-    public void split(T[] list, T key) {
-        T[] list_1 = (T[])new Object[list.length];
-        T[] list_2 = (T[])new Object[list.length];
+    public <T extends Comparable<T>> void split(T key,java.util.ArrayList<T> list_1,java.util.ArrayList<T> list_2){ 
+        
+        list_1.clear();
+        list_2.clear();
+        
+        
 
-        int l1 = 0,l2 = 0;
-        for (int i = 0; i < list.length; i++){
-            Comparable<T> value = (Comparable<T>) list[i];
-
-            if (value.compareTo(key) <= 0){
-                list_1[l1] = list[i];
-                l1++;
-            }
-            else{
-                list_2[l2] = list[i];
-                l2++;
+        for (int i = 0; i < length; i++){
+            if (key.compareTo((T)list[i]) >= 0){
+                list_1.add((T)list[i]);
+            }else{
+                list_2.add((T)list[i]);
             }
         }
         
     }
-   
+
+    
+
+    
+    
     // Bubble Sort
     public void bubbleSort() {
         for (int pass = 0; pass < length - 1; pass++) {
@@ -105,7 +115,7 @@ public class UnorderedArrayList<T> extends ArrayListClass<T> {
         if (length >= maxSize)
             System.err.println("Cannot insert in a full list.");
         else {
-            list[length] = insertItem;
+            super.list[length] = insertItem;
             length++;
         }
     }
@@ -130,6 +140,25 @@ public class UnorderedArrayList<T> extends ArrayListClass<T> {
                 System.out.println("Cannot delete! The item to be deleted is not in the list.");
             }
         }
+    }
+
+    @Override
+    public String toString(){
+
+        String output = "[";
+
+        final int MAX = super.length-1;
+
+        if (MAX <= 0){
+            return "[" + super.list[0] + "]";
+        }
+        
+        for (int i = 0; i < MAX-1; i++){
+            output += super.list[i].toString() + ", ";
+        }
+
+        output += super.list[MAX] + "]" ;
+        return output;
     }
 
 }
