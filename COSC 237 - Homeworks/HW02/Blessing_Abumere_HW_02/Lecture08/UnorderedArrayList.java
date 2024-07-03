@@ -1,12 +1,6 @@
+package Lecture08;
 
-
-
-
-
-import java.lang.reflect.Array;
-
-import Lecture08.*;
-
+//doesnt work on its own for some reason???
 /**
  * Class: UnorderedArrayList extends
  * Class: ArrayListClass
@@ -75,7 +69,7 @@ public class UnorderedArrayList<T> extends ArrayListClass<T> {
 
     
     
-    // Bubble Sort
+    /** Bubble Sort */
     public void bubbleSort() {
         for (int pass = 0; pass < length - 1; pass++) {
             for (int i = 0; i < length - 1; i++) {
@@ -142,23 +136,6 @@ public class UnorderedArrayList<T> extends ArrayListClass<T> {
         }
     }
 
-    @Override
-    public String toString(){
-
-        String output = "[";
-
-        final int MAX = super.length-1;
-
-        if (MAX <= 0){
-            return "[" + super.list[0] + "]";
-        }
-        
-        for (int i = 0; i < MAX-1; i++){
-            output += super.list[i].toString() + ", ";
-        }
-
-        output += super.list[MAX] + "]" ;
-        return output;
-    }
-
+    
+   
 }

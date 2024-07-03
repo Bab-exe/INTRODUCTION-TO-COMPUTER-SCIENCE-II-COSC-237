@@ -1,16 +1,15 @@
 //package Blessing_Abumere_HW_02.Abumere_HW_02_02;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import Lecture08.UnorderedArrayList;
+
+
 public class Abumere_HW_02_02 {
-
     static final String DIRECTORY = "Abumere_HW_02_02\\";
-
     /** gets only the numbers from file */
     static ArrayList<Integer> ListFromFile(String filename){
-        
-
         ArrayList<Integer> list = new ArrayList<Integer>();
 
         java.io.File file = new java.io.File(filename);
@@ -37,12 +36,6 @@ public class Abumere_HW_02_02 {
         return list;
     }
 
-    
-        
-        
-
-       
-    
     public static void main(String[] args) {
 
         java.util.Scanner input = new Scanner(System.in);

@@ -1,10 +1,12 @@
 package Lecture08;
 
+
+
 /**
  * Class: ArrayListClass implements
  * Interface: ArrayListADT and Clonable
  */
-public abstract class ArrayListClass<T> implements Lecture08.ArrayListADT<T>  {
+public abstract class ArrayListClass<T> implements ArrayListADT<T>  {
     protected int length; // to store the length of the list
     protected int maxSize; // to store the maximum size of the list
     protected T[] list; // array to hold the list elements
@@ -110,4 +112,41 @@ public abstract class ArrayListClass<T> implements Lecture08.ArrayListADT<T>  {
     public abstract int search(T searchItem);
 
     public abstract void remove(T removeItem);
+
+    /** default tostring for anything inheritting arraylistclass */
+    @Override
+    public String toString(){
+
+        String output = "[";
+
+        final int MAX = this.length-1;
+
+        if (MAX <= 0){
+            return "[" + this.list[0] + "]";
+        }
+        
+        for (int i = 0; i < MAX-1; i++){
+            output += this.list[i].toString() + ", ";
+        }
+
+        output += this.list[MAX] + "]" ;
+        return output;
+    }
+
+    /**default equals for anything inheritting arraylistclass */
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof ArrayListClass<?> == false) return false;
+
+        ArrayListClass<?> other = (ArrayListClass<?>) obj;
+
+        if (this.length != other.length) return false;
+
+        for (int i =0; i< this.length; i++){
+            if (this.list[i].equals(other.list[i]) == false) return false;
+        }
+
+        return true;
+    }
+
 }
