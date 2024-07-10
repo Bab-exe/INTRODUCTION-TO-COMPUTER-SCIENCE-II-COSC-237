@@ -1,13 +1,17 @@
 import java.util.Scanner;
-
-import org.w3c.dom.css.Rect;
-
 import java.util.Random;
 import java.util.Arrays;
 
 public class Test <Type> {
+
+
     public static void main(String[] args) {
-        
+
+
+     String a = "Aa";
+     
+     
+     print(a.hashCode());
         
     }
 
