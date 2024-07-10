@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 
+import Lecture08.OrderedArrayList;
+
 public class Abumere_HW_02_03 {
     static final String DIRECTORY = "Abumere_HW_02_03\\"; 
     
     /** gets only the numbers from file */
     static Number[] ListFromFile(String filename){
-        ArrayList<Number> list = new ArrayList<Number>(10);
+        ArrayList<Number> list = new ArrayList<Number>();
 
         java.io.File file = new java.io.File(filename);
 
@@ -31,16 +33,15 @@ public class Abumere_HW_02_03 {
     }
 
     public static void main(String[] args) {
-
         java.util.Scanner input = new java.util.Scanner(System.in);
         //Integer works also but if u use Number u can use Double and float
         OrderedArrayList<Number> list = new OrderedArrayList<>();
         
         System.out.print("Please input the name of the file to be opened for first list:\t");
-            Number[] list1 = ListFromFile(input.nextLine());
+            final Number[] list1 = ListFromFile(input.nextLine());
         
         System.out.print("Please input the name of the file to be opened for second list:\t");
-            Number[] list2 = ListFromFile(input.nextLine());
+            final Number[] list2 = ListFromFile(input.nextLine());
 
         list.merge(list1,list2 );
 

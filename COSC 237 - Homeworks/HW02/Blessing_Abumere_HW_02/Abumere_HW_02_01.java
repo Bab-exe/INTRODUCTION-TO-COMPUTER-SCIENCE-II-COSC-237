@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import Abumere_HW_02_01.*;
+
 public class Abumere_HW_02_01 {
 
     /**menu:  options for

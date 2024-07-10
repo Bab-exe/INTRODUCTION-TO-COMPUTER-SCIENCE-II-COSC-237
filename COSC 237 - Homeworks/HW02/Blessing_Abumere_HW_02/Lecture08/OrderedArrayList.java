@@ -1,11 +1,9 @@
+package Lecture08;
     //8. ADT: Ordered List
     //Class: OrderedArrayList extends
     //Class: ArrayListClass
 
-    
-    import Lecture08.*;
-
-    public class OrderedArrayList<T> extends ArrayListClass<T> {
+public class OrderedArrayList<T> extends ArrayListClass<T> {
 
          //Default constructor
         public OrderedArrayList() {
