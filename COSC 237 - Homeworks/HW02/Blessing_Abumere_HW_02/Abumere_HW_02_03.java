@@ -16,7 +16,7 @@ public class Abumere_HW_02_03 {
         try(java.util.Scanner input = new java.util.Scanner(file) ){
             while(input.hasNext()){
                 try {
-                    list.add(input.nextInt()); //if changed to nextdOUBLE then doubles will work cus its a number type
+                    list.add(input.nextInt()); //if changed to nextdOUBLE then doubles will work probably
                 } catch (java.util.InputMismatchException e) {
                     input.next();
                     continue;
@@ -64,6 +64,7 @@ public class Abumere_HW_02_03 {
         input.close();
     }
 
+    /** asks for split key and displays the split list */
     static void Prompt_split(java.util.Scanner input, OrderedArrayList<Number> list){
         ArrayList<Number> list1 = new ArrayList<Number>();
         ArrayList<Number> list2 = new ArrayList<Number>();
