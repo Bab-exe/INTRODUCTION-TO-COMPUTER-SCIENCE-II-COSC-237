@@ -16,42 +16,34 @@
             super(size);
         }
     
-        public T[] getList(){
-            return list;
-        }
         /** one traversal ; only works if list is 'ordered'*/
         public void merge(T[] list1, T[] list2) {
-
-            
             if (list1.length + list2.length > super.maxSize) {
                 System.err.printf("The merged lists would surpass the set Max Size\n%d > |%d|\n", list1.length+list2.length, super.maxSize);
                 return;
             }
             super.clearList();
-            super.length = list1.length + list2.length + 1;
+            super.length = list1.length + list2.length;
             
             
-            
-            Comparable<T> _item1;
-
-
+            //TODO skips Integer(70) for some reason???? 
+            Comparable<T> _item1 = null;
             int i1 = 0,i2 = 0;
-            T fix = (list1.length > list2.length) ? list1[list1.length-2] : list2[list2.length-2];
-            for (int i = 0; i< super.length; i++){
-            if(i1 < list1.length && i2 < list2.length){
-                _item1 = (Comparable<T>)list1[i1]; 
-                if(_item1.compareTo(list2[i2]) <= 0){
-                    super.list[i] = list1[i1];
-                    i1++;
-                }else{
-                    super.list[i] = list2[i2];
-                    i2++;
-                }
-                continue;
-            }
-
-            super.list[i] = fix;
             
+            for (int i = 0; i< super.length; i++){
+            
+                //will be null if list1 is finished
+                _item1 = (i1 < list1.length) ? (Comparable<T>) list1[i1] : null;
+                
+                if (_item1 != null){
+                    if (i2 < list2.length){
+                        super.list[i] = (_item1.compareTo(list2[i2]) <= 0) ? list1[i1++] : list2[i2++];
+                        continue;
+                    }
+                    super.list[i] = list1[i1++];
+                }else{
+                    super.list[i] = list2[i2++];
+                }
         }
         
             
@@ -59,7 +51,28 @@
             
               
         }
-        
+       
+        public void split(T key, java.util.ArrayList<T> L1, java.util.ArrayList<T> L2){
+
+            L1.clear();
+            L2.clear();
+            
+            final Comparable<T> KEY = (Comparable<T>) key;
+            
+
+            //list1
+            int i = 0;
+            while(i < super.length && KEY.compareTo(super.list[i]) > 0){
+                L1.add(super.list[i++]);
+            }
+            //list2
+            while(i < super.length){
+                L2.add(super.list[i++]);
+            }
+
+            
+            
+        }   
         //implementation for abstract methods defined in ArrayListClass
         //ordered list ­­> binary search
         public int search(T item) {
