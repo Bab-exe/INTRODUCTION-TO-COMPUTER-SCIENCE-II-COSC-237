@@ -112,7 +112,11 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     private String recursiveToString(DoubleLinkedListNode<T> node) {
         if (node == null) return null;
        
-        return (node.next == null)
+        //TODO: fix this
+        return (
+
+        );
+        (node.next == null)
         ? node.toString()
         : node.toString() + " -> " + recursiveToString(node.next);
     }
