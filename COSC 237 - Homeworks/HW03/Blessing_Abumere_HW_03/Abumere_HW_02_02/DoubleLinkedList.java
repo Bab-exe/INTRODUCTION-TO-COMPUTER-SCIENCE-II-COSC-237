@@ -1,7 +1,9 @@
 package Abumere_HW_02_02;
 
+
+
 public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
-    protected int count = 0; //number of nodes
+    protected int count; //number of nodes
     protected DoubleLinkedListNode<T> first,last; //reference to first and last node
     
     public DoubleLinkedList() {
@@ -10,19 +12,22 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         count = 0;
     }
 
+    /** clear list */
     public void initializeList() {
         first = null;
         last = null;
         count = 0;
+
+        System.gc();
     }
 
-    /** true only if count <= 0 */
+    /** true only if count equal to or for some reason less than 0 */
     public boolean isEmptyList() {
         return (count <= 0);
     }
 
 
-    /// getters
+    /// get
     public T front() {
         return first.info;
     }
@@ -33,83 +38,88 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         return count;     
     }
 
-    @Override
     public void print() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'print'");
+        System.out.println(toString());
     }
 
-    
     public void reversePrint() {
         System.out.println(backwardsString());
     }
 
-    
-    public boolean search(T searchItem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
+    public DoubleLinkedListNode<T> search(T searchItem) {
+        if (isEmptyList() || searchItem == null) return null;
+
+        for (DoubleLinkedListNode<T> current = this.first ; current != null ; current = current.next){
+            if (current.info.equals(searchItem))
+                return current;
+            
+        }
+        return null;
     }
 
-    /**insert new item in constant time */
+    /**inserts new item */
     public void insertNode(T insertItem) {
         DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(insertItem);
         if (this.first == null){
             this.first = node;
             this.last = (node.next == null) ? node : node.next; 
         }else{
-            node.back = this.last;
 
+            node.back = this.last;
             this.last.next = node;
+
             this.last = node;
         }
 
         count++;
-        
     }
 
-    
+    /** true if success false otherwise */
     public boolean deleteNode(T deleteItem) {
-        if (isEmptyList()) return false;
         
-        for (DoubleLinkedListNode<T> current = this.first ; current != null ; current = current.next){
-            if (current.info.equals(deleteItem)){
-                
-                
-                if(current == this.first){
-                    this.first = current.next;
-                    this.first.back = null;
-                }
-                else if (current == this.last){
-                    this.last = current.back;
-                    this.last.next = null;
-                    
-                }
-                else{
-                    //normal
-                    current.back.next = current.next;
-                    current.next.back = current.back;
-                }
-                
-                count--;
-                System.gc();
-                return true;
-            }
-        }
+        DoubleLinkedListNode<T> deleteNode = search(deleteItem); 
+            if (deleteNode == null) return false;
             
-        
+        if(this.first == deleteNode){
+            this.first = this.first.next;
 
-        return false;
+            if (this.first != null) 
+                this.first.back = null;
+        }
+        else if (this.last == deleteNode){
+            this.last = this.last.back;
+
+            if (this.last != null)
+                this.last.next = null;
+        }        
+        else{
+            deleteNode.back.next = deleteNode.next;
+            deleteNode.next.back = deleteNode.back;
+        }
+
+        count--;
+
+        System.gc();
+        return true;   
     }
 
-    @Override
+     /** toString but made much worse*/
     public String recursiveToString() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recursiveToString'");
+        return recursiveToString(this.first);
     }
 
-    @Override
-    /*** backwards tostring */
+    /** exists to make the real method work */
+    private String recursiveToString(DoubleLinkedListNode<T> node) {
+        if (node == null) return null;
+       
+        return (node.next == null)
+        ? node.toString()
+        : node.toString() + " -> " + recursiveToString(node.next);
+    }
+
+    /**toString but backwards (last -> ... -> front*/
     public String backwardsString() {
+        if (isEmptyList()) return null;
         String result = this.last.toString();
 
         for (DoubleLinkedListNode<T> current = this.last.back ; current != null ; current = current.back){
@@ -120,28 +130,73 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
 
     }
 
-    @Override
+    /** backwardstoString but made worse */
     public String recursiveBackwardsString() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'recursiveBackwardsString'");
+        return recursiveBackwardsString(this.last);
+    }
+
+    /** exists to make the real method work */
+    private String recursiveBackwardsString(DoubleLinkedListNode<T> node) {
+        if (node == null) return null;
+       
+        return (
+            (node.back == null)
+            ? node.toString()
+            : node.toString() + " -> " + recursiveBackwardsString(node.back)
+        );
+        
     }
 
     
-    @Override
+    
     public void copy(DoubleLinkedList<T> otherList) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'copy'");
+        initializeList();
+
+        for (DoubleLinkedListNode<T> current = otherList.first ; current != null ; current = current.next){
+            insertNode(current.info);
+        }
+
     }
 
-    @Override
+    
     public void reversedCopy(DoubleLinkedList<T> otherList) {
-        this.first = null;
-        this.last = null;
+        initializeList();
 
         for (DoubleLinkedListNode<T> current = otherList.last ; current != null ; current = current.back){
             insertNode(current.info);
         }
+    }
 
+    
+    /** (front -> ... -> back) */
+    @Override public String toString(){
+        if (isEmptyList()) return null;
+
+        String result = this.first.toString();
+
+        for (DoubleLinkedListNode<T> current = this.first.next ; current != null ; current = current.next){
+            result += " -> " + current.toString();
+        }
+
+        return result;
+    }
+
+    @Override public boolean equals(Object obj){
+        if (obj instanceof DoubleLinkedList == false) return false;
+
+        DoubleLinkedList<T> other = (DoubleLinkedList<T>) obj;
+
+        final boolean NOT_NULL = (
+            this.first != null && other.first != null &&
+            this.last != null && other.last != null
+        );
+
+        return (
+            NOT_NULL && 
+            this.first.equals(other.first) &&
+            this.last.equals(other.last) &&
+            this.count == other.count
+        );
     }
  
     //Double linked list node class
@@ -167,16 +222,17 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
 
         @Override
         public boolean equals(Object obj) {
-
             if (obj instanceof DoubleLinkedListNode == false) return false;
-
-            DoubleLinkedListNode<?> other = (DoubleLinkedListNode<?>) obj;
+        
+            DoubleLinkedListNode<T> other = (DoubleLinkedListNode<T>) obj;
+            
             return (
                 this.info.equals(other.info) &&
                 this.next == other.next && 
                 this.back == other.back
             );
         }
+    
     }
 
 }

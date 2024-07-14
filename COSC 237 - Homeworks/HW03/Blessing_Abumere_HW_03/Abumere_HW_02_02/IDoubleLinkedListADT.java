@@ -8,7 +8,7 @@ public interface IDoubleLinkedListADT<T> {
     public int length();
     public void print();
     public void reversePrint();
-    public boolean search(T searchItem);
+    public DoubleLinkedList<T>.DoubleLinkedListNode<T> search(T searchItem);
     public void insertNode(T insertItem);
     public boolean deleteNode(T deleteItem);
     @Override public String toString();
