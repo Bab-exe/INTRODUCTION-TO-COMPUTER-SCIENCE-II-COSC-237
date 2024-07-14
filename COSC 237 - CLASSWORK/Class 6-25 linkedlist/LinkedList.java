@@ -2,8 +2,6 @@ public class LinkedList{
 
     public Node first,last;
     
-   
-
     public LinkedList(){
         this.first = null;
         this.last = null;
