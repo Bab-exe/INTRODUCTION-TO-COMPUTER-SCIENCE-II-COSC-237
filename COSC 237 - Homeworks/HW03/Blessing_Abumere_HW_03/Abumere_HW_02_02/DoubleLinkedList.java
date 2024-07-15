@@ -11,6 +11,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         last = null;
         count = 0;
     }
+    
 
     /** clear list */
     public void initializeList() {
@@ -39,7 +40,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     }
 
     public void print() {
-        System.out.println(toString());
+        System.out.print(toString());
     }
 
     public void reversePrint() {
@@ -57,23 +58,59 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         return null;
     }
 
-    /**inserts new item */
+    /**inserts new item in order */
     public void insertNode(T insertItem) {
         DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(insertItem);
+
         if (this.first == null){
             this.first = node;
-            this.last = (node.next == null) ? node : node.next; 
+            this.last = (node.next == null) ? node : node.next;    
         }else{
+            Comparable<T> _item = (Comparable<T>)insertItem;
 
-            node.back = this.last;
-            this.last.next = node;
-
-            this.last = node;
+            //less than first
+            if (_item.compareTo(this.first.info) < 0){
+                node.next = this.first;
+                this.first.back = node;
+                this.first = node;
+            }
+            //bigger than last
+            else if (_item.compareTo(this.last.info) > 0){
+                node.back = this.last;
+                this.last.next = node;
+                this.last = node;
+            }
+            else{
+                //middle / worst case
+                DoubleLinkedListNode<T> current = this.first;
+                while (current != null && _item.compareTo(current.info) > 0){
+                    current = current.next;
+                }
+                
+                node.next = current;
+                node.back = current.back;
+                current.back.next = node;
+                current.back = node;
+            }
+    
         }
-
         count++;
     }
 
+    /** insert at end */
+    public void insertEnd(T item){
+        DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(item);
+
+        if (this.first == null){
+            this.first = node;
+            this.last = (node.next == null) ? node : node.next;    
+        }else{
+            node.back = this.last;
+            this.last.next = node;
+            this.last = node;
+        }
+        count++;
+    }
     /** true if success false otherwise */
     public boolean deleteNode(T deleteItem) {
         
@@ -112,13 +149,12 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     private String recursiveToString(DoubleLinkedListNode<T> node) {
         if (node == null) return null;
        
-        //TODO: fix this
         return (
-
+            (node.next == null)
+            ? node.toString()
+            : node.toString() + " -> " + recursiveToString(node.next)
         );
-        (node.next == null)
-        ? node.toString()
-        : node.toString() + " -> " + recursiveToString(node.next);
+        
     }
 
     /**toString but backwards (last -> ... -> front*/
@@ -167,14 +203,14 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         initializeList();
 
         for (DoubleLinkedListNode<T> current = otherList.last ; current != null ; current = current.back){
-            insertNode(current.info);
-        }
+            insertEnd(current.info);
+        }        
     }
 
     
     /** (front -> ... -> back) */
     @Override public String toString(){
-        if (isEmptyList()) return null;
+        if (isEmptyList()) return "" ; //return null;
 
         String result = this.first.toString();
 
@@ -204,7 +240,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     }
  
     //Double linked list node class
-    public class DoubleLinkedListNode<T> {
+    public class DoubleLinkedListNode<T>{
         T info;
         DoubleLinkedListNode<T> next,back;
         
@@ -237,6 +273,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
             );
         }
     
+        
     }
 
 }
