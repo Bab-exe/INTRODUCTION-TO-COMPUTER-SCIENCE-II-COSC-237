@@ -3,10 +3,7 @@ public class Node{
     public int info;
     public Node link;
  
-    public Node(int info,Node link){
-        this.info = info;
-        this.link = link;
-    }
+    
 
     public Node(int info){
         this.info = info;
@@ -25,7 +22,7 @@ public class Node{
 
     @Override
     public boolean equals(Object obj){
-        if (!(obj instanceof Node)) return false;
+        if (obj instanceof Node == false) return false;
 
         Node other = (Node) obj;
 

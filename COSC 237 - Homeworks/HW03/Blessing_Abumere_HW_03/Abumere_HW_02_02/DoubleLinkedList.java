@@ -63,8 +63,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(insertItem);
 
         if (this.first == null){
-            this.first = node;
-            this.last = (node.next == null) ? node : node.next;    
+            this.last = this.first = node;   
         }else{
             Comparable<T> _item = (Comparable<T>)insertItem;
 
@@ -102,8 +101,8 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         DoubleLinkedListNode<T> node = new DoubleLinkedListNode<T>(item);
 
         if (this.first == null){
-            this.first = node;
-            this.last = (node.next == null) ? node : node.next;    
+            this.last = this.first = node;
+               
         }else{
             node.back = this.last;
             this.last.next = node;
@@ -152,18 +151,18 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         return (
             (node.next == null)
             ? node.toString()
-            : node.toString() + " -> " + recursiveToString(node.next)
+            : node.toString() + " - " + recursiveToString(node.next)
         );
         
     }
 
-    /**toString but backwards (last -> ... -> front*/
+    /**toString but backwards (last - ... - front*/
     public String backwardsString() {
         if (isEmptyList()) return null;
         String result = this.last.toString();
 
         for (DoubleLinkedListNode<T> current = this.last.back ; current != null ; current = current.back){
-            result += " -> " + current.toString();
+            result += " - " + current.toString();
         }
 
         return result;
@@ -182,7 +181,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         return (
             (node.back == null)
             ? node.toString()
-            : node.toString() + " -> " + recursiveBackwardsString(node.back)
+            : node.toString() + " - " + recursiveBackwardsString(node.back)
         );
         
     }
@@ -208,14 +207,14 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     }
 
     
-    /** (front -> ... -> back) */
+    /** (front - ... - back) */
     @Override public String toString(){
         if (isEmptyList()) return "" ; //return null;
 
         String result = this.first.toString();
 
         for (DoubleLinkedListNode<T> current = this.first.next ; current != null ; current = current.next){
-            result += " -> " + current.toString();
+            result += " - " + current.toString();
         }
 
         return result;

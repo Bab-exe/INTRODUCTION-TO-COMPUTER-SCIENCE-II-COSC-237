@@ -5,7 +5,7 @@ public class Client_DLLString {
         DoubleLinkedList<String>list_1 = new DoubleLinkedList<String>();
         DoubleLinkedList<String>list_2 = new DoubleLinkedList<String>();
         String item;
-        list_1.insertNode("John");
+        list_1.insertNode("John"); 
         list_1.insertNode("Ann");
         list_1.insertNode("Paul");
         list_1.insertNode("Joshua");
