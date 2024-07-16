@@ -1,7 +1,7 @@
 import WrittenItem.*;
 import MediaItem.*;
 
-public class test {
+public class Lab7Client {
     public static void main(String[] args) {
         long ID = 123456;
         String title = "To kill a mocking bird";
