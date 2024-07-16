@@ -1,7 +1,5 @@
 package Abumere_HW_02_02;
 
-
-
 public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
     protected int count; //number of nodes
     protected DoubleLinkedListNode<T> first,last; //reference to first and last node
@@ -27,7 +25,6 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         return (count <= 0);
     }
 
-
     /// get
     public T front() {
         return first.info;
@@ -47,7 +44,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedListADT<T> {
         System.out.println(backwardsString());
     }
 
-    public DoubleLinkedListNode<T> search(T searchItem) {
+    public DoubleLinkedListNode<T> search(final T searchItem) {
         if (isEmptyList() || searchItem == null) return null;
 
         for (DoubleLinkedListNode<T> current = this.first ; current != null ; current = current.next){
