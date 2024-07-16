@@ -1,11 +1,11 @@
 import java.util.Scanner;
-import LinkedListInt.UnorderedLinkedListInt;
+import Part2.UnorderedLinkedListInt;
 
 public class ClientUnorderedLinkedListInt {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         UnorderedLinkedListInt intList = new UnorderedLinkedListInt();
-        UnorderedLinkedListInt tempList; //???
+        UnorderedLinkedListInt tempList = new UnorderedLinkedListInt();
         int num;
         System.out.println("Enter integers (999 to stop)");
         num = Input_Int(input);
@@ -39,6 +39,23 @@ public class ClientUnorderedLinkedListInt {
         System.out.print("Testing .toString. After deleting " + num + ", the list is: " + intList);
         System.out.println("\nThe length of the list after delete is: " + intList.length());
         // Optional: add more testing here
+
+        //equals method
+        tempList.copy(intList);
+        
+        System.out.println("\ntesting .equals()");
+        System.out.println(
+            intList.toString() + "\n" + tempList.toString() + "\n" +
+            ((intList.equals(tempList)) ? "The lists are equal" : "The lists are NOT equal")
+        );
+
+        tempList.insertLast(999);
+
+        System.out.println(
+            intList.toString() + "\n" + tempList.toString() + "\n" +
+            ((intList.equals(tempList)) ? "The lists are equal" : "The lists are NOT equal")
+        );
+
     } // add methods for input validation
 
 

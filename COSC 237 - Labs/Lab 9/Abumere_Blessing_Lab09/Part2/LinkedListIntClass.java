@@ -1,7 +1,7 @@
-package LinkedListInt;
+package Part2;
 
 abstract class LinkedListIntClass implements ILinkedListIntADT{
-    protected Node first,last;
+    protected LinkedListNode first,last;
     private int count;
     
     public LinkedListIntClass(){
@@ -9,6 +9,16 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
         this.last = null;
         this.count = 0;
        
+    }
+    
+    public void copy(LinkedListIntClass other){
+        initializeList();
+
+        for (LinkedListNode current = other.first; current != null; current = current.link){
+            this.insertLast(current.info);
+        }
+
+
     }
 
     /** returns the smallest of all the data values in a list */
@@ -44,7 +54,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
 
     /** true only if found  */
     public boolean search(int query){
-        for (Node current = this.first; current != null; current = current.link){
+        for (LinkedListNode current = this.first; current != null; current = current.link){
             if (current.info == query) return true;
         }
         return false;
@@ -55,7 +65,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
     }
     
     public void insertLast(int info){
-        final Node node = new Node(info);
+        final LinkedListNode node = new LinkedListNode(info);
         if (this.first == null){
             this.first = node;
             this.last = node;
@@ -73,7 +83,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
     }
 
     public void insertFirst(int info){
-        final Node node = new Node(info);
+        final LinkedListNode node = new LinkedListNode(info);
         if (this.first == null){
             this.first = node;
             this.last = node;
@@ -84,7 +94,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
         count++;
     }
 
-    /** deletes 1 node that has {@code info} */
+    /** deletes 1 LinkedListNode that has {@code info} */
     public boolean deleteNode(final int info){
         if (isEmptyList()) return false;
         //special cases
@@ -94,7 +104,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
             return true;
         }
 
-        for(Node previous = this.first,current = previous.link; current != null;previous = current,current = current.link){
+        for(LinkedListNode previous = this.first,current = previous.link; current != null;previous = current,current = current.link){
             if (current.info == info) {
                 if (current == this.last){
                     previous.link = null;
@@ -110,7 +120,7 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
         return false;
     }
 
-    /** deletes all nodes that contain {@code info} */
+    /** deletes all LinkedListNodes that contain {@code info} */
     public boolean deleteAll(final int info){
         if (deleteNode(info) == false) return false;
 
@@ -131,8 +141,8 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
 
         if (other.count != this.count) return false;
 
-        Node current1 = this.first;
-        Node current2 = other.first;
+        LinkedListNode current1 = this.first;
+        LinkedListNode current2 = other.first;
 
         while(current1 != null){
             if(current1.equals(current2) == false) return false;
@@ -143,42 +153,6 @@ abstract class LinkedListIntClass implements ILinkedListIntADT{
         return true;
     }
    
-    class Node{
-        public int info;
-        public Node link;
     
-        public Node(int info){
-            this.info = info;
-            this.link = null;
-        }
-
-        public Node(){
-            this.info = 0;
-            this.link = null;
-        }
-
-        @Override
-        public String toString(){
-            return this.info + "";
-        }
-
-        @Override
-        public boolean equals(Object obj){
-            if (obj instanceof Node == false) return false;
-
-            Node other = (Node) obj;
-
-
-            return (
-                this.info == other.info &&
-                this.link == other.link  
-            );
-
-        }
-
-
-
-    }
-        
     
 }

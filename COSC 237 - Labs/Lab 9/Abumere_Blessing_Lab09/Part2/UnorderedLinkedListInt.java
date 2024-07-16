@@ -1,4 +1,4 @@
-package LinkedListInt;
+package Part2;
 
 public class UnorderedLinkedListInt extends LinkedListIntClass{
 
@@ -7,9 +7,10 @@ public class UnorderedLinkedListInt extends LinkedListIntClass{
     }
 
     
+    
     public int findSum(){
         int sum = 0;
-        for (Node current = this.first; current != null; current = current.link){
+        for (LinkedListNode current = this.first; current != null; current = current.link){
             sum += current.info;
         }
         return sum;
@@ -19,7 +20,7 @@ public class UnorderedLinkedListInt extends LinkedListIntClass{
     public int findMin(){
         int min = this.first.info;
 
-        for (Node current = this.first; current != null; current = current.link){
+        for (LinkedListNode current = this.first; current != null; current = current.link){
             if (current.info < min) min = current.info;
         }
 
@@ -33,7 +34,7 @@ public class UnorderedLinkedListInt extends LinkedListIntClass{
 
         String output = "";
 
-        for (Node current = this.first; current.link != null; current = current.link){
+        for (LinkedListNode current = this.first; current.link != null; current = current.link){
             output += current.info + ", ";
         }
 

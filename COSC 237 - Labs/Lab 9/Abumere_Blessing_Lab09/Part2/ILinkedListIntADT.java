@@ -1,4 +1,4 @@
-package LinkedListInt;
+package Part2;
 
 public interface ILinkedListIntADT {
     public boolean isEmptyList();
