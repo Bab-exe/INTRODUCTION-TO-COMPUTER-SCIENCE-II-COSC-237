@@ -4,18 +4,15 @@
 //Sample input 02 (in this order): 5 4 3 3 1 2 1 5 5 6 4 2 2 1 999
 //-----------------------------//
 import java.util.Scanner;
-public class ClientDupBST {
+public class end_test {
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    DupBinarySearchTree<Double> bst = new DupBinarySearchTree<Double>();
+    
+    DupBinarySearchTree<Integer> bst = new DupBinarySearchTree<Integer>();
     //-----------------------------//
-    Double num;
-    System.out.print("Enter Doubles(999 to stop): ");
-    num = input.nextDouble();
-    while (num != 999) {
-      bst.insert(num);
-      num = input.nextInt();
-    }
+    Integer[] num = {3,2,1,2,3,1,4,1,1,5,999};
+
+    
+    
     //-----------------------------//
     System.out.println("Printing sorted tree WITHOUT duplicates: ");
     bst.printSortedTreeWithoutDuplicates();
@@ -28,21 +25,22 @@ public class ClientDupBST {
     System.out.println("Tree Height: " + bst.treeHeight());
     //-----------------------------//
     System.out.print("Enter value to search for: ");
-    num = input.nextInt();
-    int numCopies = bst.search(num);
+    
+    final Integer value = 3;
+    int numCopies = bst.search(value);
     if (numCopies > 0)
       System.out.println(num + " was found in this tree with " + numCopies + " copies");
     else
       System.out.println(num + " was NOT found in this tree");
     //-----------------------------//
     System.out.print("\nEnter value to be deleted from tree: ");
-    num = input.nextInt();
-    bst.delete(num);
+    final Integer delete = 1;
+    bst.delete(delete);
     //-----------------------------//
     System.out.println("\nPrinting sorted tree WITH duplicates: ");
     bst.printSortedTreeWithDuplicates();
     //-----------------------------//
-     input.close();
+   
     System.out.println("ALL DONE");    
   }
 }

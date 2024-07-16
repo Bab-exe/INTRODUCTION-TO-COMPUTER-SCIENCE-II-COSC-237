@@ -4,6 +4,7 @@
 import java.util.NoSuchElementException;
 
 public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
+  
   //======================================================================//
   //Definition of the DupBinaryTreeNode class
   protected class DupBinaryTreeNode<T> {
@@ -13,11 +14,12 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
     public DupBinaryTreeNode<T> rLink;
     
     //-----------------------------//
-    //----- TO BE IMPLEMENTED -----//
+    //-----  BE IMPLEMENTED -----//
     //-----------------------------//
     // [7.5pts] Default constructor
     public DupBinaryTreeNode() {
-      
+      mLink = rLink = lLink = null;
+      info = null;
     }
     
     //-----------------------------//
@@ -25,7 +27,10 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
     //-----------------------------//
     // [7.5pts] Alternate constructor
     public DupBinaryTreeNode(T item, DupBinaryTreeNode<T> left, DupBinaryTreeNode<T> middle, DupBinaryTreeNode<T> right) {
-      
+      this.info = item;
+      this.lLink = left;
+      this.mLink = middle;
+      this.rLink = right;
     }
     
     //-----------------------------//
@@ -95,12 +100,16 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
   //----- TO BE IMPLEMENTED -----//
   //-----------------------------//
   // [10pts]
-  // Function to print the sorted tree without duplicates values
+  /**  Function to print the sorted tree without duplicates values
   // Input: + DupBinaryTreeNode<T> t : The current node in the tree
-  // Output: + Nothing (void)
+  // Output: + Nothing (void) */
   //-----------------------------//
   public void printDistinct(DupBinaryTreeNode<T> t) {
-    
+    if (t == null) return;
+
+    printDistinct(t.lLink);
+      System.out.print(t.info + " ");
+    printDistinct(t.rLink);
   }
   
   //-----------------------------//  
@@ -120,7 +129,15 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
   // Output: + Nothing (void)
   //-----------------------------//
   public void printDup(DupBinaryTreeNode<T> t) {
-    
+    if (t == null) return;
+
+    printDup(t.lLink);
+      System.out.print(t.info + " ");
+
+    printDup(t.mLink);
+    printDup(t.rLink);
+
+
   }
   
   //-----------------------------//
@@ -141,6 +158,15 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
   //-----------------------------//
   // Helper method called by treeHeight
   private int height(DupBinaryTreeNode<T> t) {
+    if (t == null) return -1; //completely empty = -1 ; root = 0
+
+    return 1 + Math.max(
+      height(t.mLink),
+      Math.max(height(t.lLink), height(t.rLink))
+    );
+    
+
+      
     
   }
   
@@ -161,8 +187,10 @@ public abstract class DupBinaryTree<T> implements DupBinaryTreeADT<T> {
   // Input: DupBinaryTreeNode<T> tree : The current node in the tree
   // Output: True or False
   //-----------------------------//
+  //TODO: confirm dup??
   public boolean isDupBST(DupBinaryTreeNode<T> tree){    
     
+    return (tree.mLink == null) ? false : true;
   }  
   //-----------------------------//  
   //abstract methods
