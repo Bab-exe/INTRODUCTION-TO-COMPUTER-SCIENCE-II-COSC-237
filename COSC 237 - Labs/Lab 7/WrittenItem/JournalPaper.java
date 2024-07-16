@@ -35,7 +35,7 @@ public class JournalPaper extends Item.WrittenItem{
 
         final JournalPaper other = (JournalPaper) obj;
 
-        return super.equals(other) && YEAR == other.YEAR;
+        return this.YEAR == other.YEAR && super.equals(other);
     }
 
     
