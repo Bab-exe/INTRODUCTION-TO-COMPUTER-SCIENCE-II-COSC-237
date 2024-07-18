@@ -57,6 +57,13 @@ public class LinkedStackClass<T> implements StackADT<T> {
         stackTop = newNode;
     }
 
+    /** mass pushing to stack ; exists for easier testing  */
+    public void push(T... values) {
+        for (T value : values) {
+            push(value);
+        }
+    }
+
     public void pop() {
         if (stackTop == null)
             System.err.println("Cannot pop from an empty stack!");

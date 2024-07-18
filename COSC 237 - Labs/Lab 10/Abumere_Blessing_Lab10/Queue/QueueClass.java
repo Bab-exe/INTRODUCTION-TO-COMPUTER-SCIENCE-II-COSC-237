@@ -71,6 +71,13 @@ public class QueueClass<T> implements QueueADT<T> {
             list[queueRear] = newItem;
         }
     }
+    
+    /** mass enqueing to queue ; exists because lazy*/
+    public void enqueue(T... values) {
+        for (T value : values) {
+            enqueue(value);
+        }
+    }
 
     public void dequeue() throws QueueUnderflowException {
         if (isEmptyQueue()) throw new QueueUnderflowException();
